@@ -46,9 +46,9 @@ export default function Features() {
   return (
     <section className="mx-auto max-w-[1280px] px-4 py-20">
       <h2 className="mx-auto max-w-[624px] text-center font-sans text-[60px] font-medium leading-[1.1] text-ink">
-        The little <span className="font-accent italic">things</span> that{" "}
-        <span className="font-accent italic">make</span> every trip{" "}
-        <span className="font-accent italic">better</span>
+        The little <span className="font-accent italic text-accent">things</span> that{" "}
+        <span className="font-accent italic text-accent">make</span> every trip{" "}
+        <span className="font-accent italic text-accent">better</span>
       </h2>
 
       <div className="mt-16 grid grid-cols-4 gap-6">

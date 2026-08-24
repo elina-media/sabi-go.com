@@ -24,8 +24,8 @@ export default function Reviews() {
     <section id="reviews" className="w-full scroll-mt-[140px] py-20">
       <h2 className="mx-auto max-w-[701px] px-4 text-center font-sans text-[60px] font-medium leading-[1.1] text-ink">
         Don&rsquo;t take our word for it –{" "}
-        <span className="font-accent italic">hear</span> from{" "}
-        <span className="font-accent italic">travelers</span>
+        <span className="font-accent italic text-accent">hear</span> from{" "}
+        <span className="font-accent italic text-accent">travelers</span>
       </h2>
 
       <div className="mt-16 flex flex-col gap-6">

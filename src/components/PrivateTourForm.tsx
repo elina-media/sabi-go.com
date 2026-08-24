@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 
 const inputClassName =
-  "h-[60px] w-full rounded-[70px] bg-white px-6 font-sans text-2xl text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
+  "h-[50px] w-full rounded-[70px] bg-white px-6 font-sans text-[20px] text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
 
 export default function PrivateTourForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
@@ -34,7 +34,7 @@ export default function PrivateTourForm() {
 
   if (status === "success") {
     return (
-      <div className="flex w-full max-w-[519px] flex-col gap-2 rounded-[30px] bg-white px-6 py-5 text-ink">
+      <div className="flex w-full max-w-[415px] flex-col gap-2 rounded-[30px] bg-white px-6 py-5 text-ink">
         <p className="font-sans text-2xl font-medium">Thank you!</p>
         <p className="font-sans text-lg">
           We&rsquo;ve received your request and will contact you shortly.
@@ -44,7 +44,7 @@ export default function PrivateTourForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-[519px] flex-col">
+    <form onSubmit={handleSubmit} className="flex w-full max-w-[415px] flex-col">
       <div className="flex flex-col gap-1">
         <input
           type="text"
@@ -74,7 +74,7 @@ export default function PrivateTourForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="mt-2 flex h-[60px] w-full max-w-[302px] items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
+        className="mt-2 flex h-[50px] w-full items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Submit a request"}
       </button>

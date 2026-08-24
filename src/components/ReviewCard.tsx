@@ -13,13 +13,14 @@ export default function ReviewCard({ review }: { review: Review }) {
               alt={review.name}
               fill
               unoptimized
+              loading="eager"
               className="object-cover"
             />
           </div>
           <div className="flex flex-col gap-1">
-            <p className="font-sans text-2xl text-ink">{review.name}</p>
+            <p className="font-sans text-[20px] text-ink">{review.name}</p>
             <p className="font-sans text-base text-ink/50">
-              {review.daysAgo}
+              {review.reviewDate}
             </p>
           </div>
         </div>

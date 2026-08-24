@@ -4,41 +4,41 @@ export type FaqEntry = {
   answer: string;
 };
 
-// Placeholder content — same question repeated in the Figma source too,
-// and answers are Lorem Ipsum for now. Replace with real copy later,
-// the accordion just maps over whatever is here.
-const LOREM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.";
-
 export const faq: FaqEntry[] = [
   {
     id: "faq-1",
     question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    answer:
+      "If it's your first time in Almaty, we recommend the Charyn, Kolsay & Kaindy tour. It's our most popular route and covers the region's main natural highlights in a single day, suitable for any fitness level.",
   },
   {
     id: "faq-2",
-    question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    question: "Do I need any special physical preparation?",
+    answer:
+      "No, most of our tours are designed for travelers without special training. Routes include short, easy walks. If a tour involves more active hiking, we mention it clearly in the tour description.",
   },
   {
     id: "faq-3",
-    question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    question: "What's included in the tour price?",
+    answer:
+      "The price includes transportation in a comfortable vehicle, an English-speaking guide, and entrance fees to parks and reserves. Meals and personal expenses are not included unless stated otherwise.",
   },
   {
     id: "faq-4",
-    question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    question: "Can I book a private tour?",
+    answer:
+      "Yes, we organize private tours tailored to your schedule and preferences. Just leave a request in the \"Private tour\" section, and we'll help you build a route that fits your needs.",
   },
   {
     id: "faq-5",
-    question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    question: "Do you offer hotel pickup?",
+    answer:
+      "Yes, most of our tours include pickup from your hotel or another location in Almaty. The exact time and meeting point will be confirmed by our manager after booking.",
   },
   {
     id: "faq-6",
-    question: "Which trip should I choose if I’m going for the first time?",
-    answer: LOREM,
+    question: "Do your guides speak English?",
+    answer:
+      "Yes, all our guides have a C1 level of English, so language won't be a barrier during your trip.",
   },
 ];

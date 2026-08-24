@@ -18,13 +18,13 @@ export default function TourCard({ tour }: { tour: Tour }) {
       <div className="mt-4 flex flex-col gap-2">
         <Link
           href={tour.bookHref}
-          className="flex h-[60px] w-full max-w-[302px] items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover"
+          className="flex h-[50px] w-full max-w-[220px] items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover"
         >
           Book a tour
         </Link>
         <Link
           href={tour.moreHref}
-          className="flex h-[60px] w-full max-w-[302px] items-center justify-center rounded-full bg-ink text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-[#3a3a3a]"
+          className="flex h-[50px] w-full max-w-[220px] items-center justify-center rounded-full bg-ink text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-[#3a3a3a]"
         >
           More
         </Link>

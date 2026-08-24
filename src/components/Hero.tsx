@@ -14,7 +14,7 @@ export default function Hero() {
           playsInline
           className="absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/40" />
 
         {/* Static header, part of the hero — scrolls away with it.
             Header.tsx is the sticky version that fades in once this
@@ -31,16 +31,21 @@ export default function Hero() {
 
           <h1 className="max-w-4xl font-sans text-[80px] font-medium leading-[1.05] text-white">
             Discover the{" "}
-            <span className="font-accent italic">wild side</span> of
-            Kazakhstan
+            <span className="font-accent italic">wild side</span>
+            <br />
+            of Kazakhstan
           </h1>
 
           <p className="max-w-2xl text-2xl text-white">
-            Explore Kazakhstan&rsquo;s most breathtaking landscapes with
-            carefully planned tours and local guides.
+            Explore Kazakhstan&rsquo;s most breathtaking landscapes
+            <br />
+            with carefully planned tours and local guides.
           </p>
 
-          <button className="pointer-events-auto flex h-[50px] items-center gap-2 rounded-full bg-accent px-7 text-white transition-colors hover:bg-accent-hover">
+          <a
+            href="#tours"
+            className="pointer-events-auto flex h-[50px] items-center gap-2 rounded-full bg-accent px-7 text-white transition-colors hover:bg-accent-hover"
+          >
             <Image
               src="/hero/route-square.svg"
               alt=""
@@ -48,7 +53,7 @@ export default function Hero() {
               height={24}
             />
             <span className="text-[22px] tracking-[-0.5px]">View tours</span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

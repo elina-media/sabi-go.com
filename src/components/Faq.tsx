@@ -14,9 +14,9 @@ export default function Faq() {
   return (
     <section className="mx-auto max-w-[1280px] px-4 py-20">
       <h2 className="mx-auto text-center font-sans text-[60px] font-medium leading-[1.1] text-ink">
-        Got <span className="font-accent italic">Questions</span>?
+        Got <span className="font-accent italic text-accent">Questions</span>?
         <br />
-        We&rsquo;ve Got <span className="font-accent italic">Answers</span>
+        We&rsquo;ve Got <span className="font-accent italic text-accent">Answers</span>
       </h2>
 
       <div className="mt-16 grid grid-cols-2 items-start gap-6">
