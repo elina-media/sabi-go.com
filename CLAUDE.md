@@ -19,7 +19,10 @@
 - `src/app/fonts.ts` — локальные шрифты через `next/font/local`
 - `src/app/favicon.ico` — фавикон
 - `src/components/Header.tsx` — sticky-хедер, появляется при скролле, `"use client"`
-- `src/components/NavbarContent.tsx` — общее содержимое navbar (лого/меню/языковой переключатель/WhatsApp), переиспользуется в `Hero.tsx` и `Header.tsx`, принимает `theme: "light" | "dark"`
+- `src/components/NavbarContent.tsx` — общее содержимое navbar (лого/меню/языковой переключатель/WhatsApp), переиспользуется в `Hero.tsx` и `Header.tsx`, принимает `theme: "light" | "dark"`. На мобилке рендерит только лого + кнопку-триггер (гамбургер/крестик), сам мобильный drawer — в `MobileMenu.tsx`. `"use client"`
+- `src/components/MobileMenuProvider.tsx` — React Context для состояния мобильного меню (`isOpen`/`setIsOpen`), тот же паттерн что `LanguageProvider.tsx`; общее состояние нужно, т.к. `NavbarContent.tsx` монтируется дважды (Hero + Header). Подключён в `layout.tsx`. `"use client"`
+- `src/components/MobileMenu.tsx` — сам мобильный drawer (боковая шторка с лого/языком/меню/контактами/кнопкой), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. `"use client"`
+- `src/components/LanguageProvider.tsx` — React Context для языка (`current`/`setCurrent`), подключён в `layout.tsx`, читается через `useLanguage()`. `"use client"`
 - `src/components/Hero.tsx` — первый экран (видео-фон + встроенный статичный navbar)
 - `src/components/Features.tsx` — блок "The little things..." (4 карточки)
 - `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`
@@ -29,6 +32,7 @@
 - `src/components/Footer.tsx` — футер (лого, соцсети, меню, документация, копирайт)
 - `src/components/LanguageSwitcher.tsx` — переключатель языка (пока UI-заглушка без реального i18n), `"use client"`
 - `src/components/GlobeIcon.tsx` — инлайн SVG-иконка глобуса (`currentColor`, для темизации)
+- `src/components/MenuIcon.tsx`, `CloseIcon.tsx` — инлайн SVG-иконки гамбургера и крестика (`currentColor`), тот же паттерн что `GlobeIcon.tsx`, используются в мобильном меню
 - `src/data/tours.ts` — данные туров + типы `Tour`/`TourImage`
 - `src/data/reviews.ts` — данные отзывов + тип `Review`
 - `src/data/faq.ts` — вопросы/ответы FAQ + тип `FaqEntry`
@@ -43,7 +47,7 @@
 ## Конвенции
 - Компоненты — `PascalCase.tsx`, один компонент = один блок страницы (`src/components/{Block}.tsx`)
 - Стили — только Tailwind-классы (utility-first); кастомные токены — через `@theme inline` в `globals.css`; inline `style`, CSS-модули и styled-components не используются
-- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `LanguageSwitcher`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
+- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `LanguageProvider`, `LanguageSwitcher`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
 - Данные для повторяющихся блоков — TS-массивы в `src/data/*.ts`; каждый файл экспортирует `type` + массив, компоненты просто мапят данные — контент редактируется без изменения компонентов
 - Типы — не в отдельной папке `/types`, а прямо рядом с данными в `src/data/*.ts`
 - Отдельных папок `/hooks`, `/lib`, `/utils` пока нет — весь код лежит в компонентах

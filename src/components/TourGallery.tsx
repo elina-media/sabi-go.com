@@ -44,7 +44,7 @@ export default function TourGallery({
   }
 
   return (
-    <div className="relative h-[350px] w-full overflow-hidden rounded-[30px]">
+    <div className="relative h-[160px] w-full overflow-hidden rounded-[16px] md:h-[350px] md:rounded-[30px]">
       <Image
         src={images[index].src}
         alt={images[index].alt}
@@ -54,7 +54,7 @@ export default function TourGallery({
       />
 
       {badge && (
-        <span className="absolute right-4 top-4 flex h-[30px] items-center rounded-full bg-white/16 px-4 text-base text-white backdrop-blur-[3.5px]">
+        <span className="absolute right-2 top-2 flex h-[22px] items-center rounded-full bg-white/16 px-2.5 text-xs text-white backdrop-blur-[3.5px] md:right-4 md:top-4 md:h-[30px] md:px-4 md:text-base">
           {badge}
         </span>
       )}
@@ -65,7 +65,7 @@ export default function TourGallery({
             type="button"
             onClick={showPrevious}
             aria-label="Previous photo"
-            className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white"
+            className="absolute left-2 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:left-3 md:size-9"
           >
             <Chevron direction="left" />
           </button>
@@ -73,12 +73,12 @@ export default function TourGallery({
             type="button"
             onClick={showNext}
             aria-label="Next photo"
-            className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white"
+            className="absolute right-2 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:right-3 md:size-9"
           >
             <Chevron direction="right" />
           </button>
 
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5 md:bottom-3">
             {images.map((image, i) => (
               <span
                 key={image.src}

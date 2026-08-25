@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { neueMontreal, ppEditorialItalic } from "./fonts";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { MobileMenuProvider } from "@/components/MobileMenuProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${neueMontreal.variable} ${ppEditorialItalic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <MobileMenuProvider>{children}</MobileMenuProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

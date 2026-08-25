@@ -34,7 +34,7 @@ export default function PrivateTourForm() {
 
   if (status === "success") {
     return (
-      <div className="flex w-full max-w-[415px] flex-col gap-2 rounded-[30px] bg-white px-6 py-5 text-ink">
+      <div className="flex w-full max-w-[518px] flex-col gap-2 rounded-[30px] bg-white px-6 py-5 text-ink">
         <p className="font-sans text-2xl font-medium">Thank you!</p>
         <p className="font-sans text-lg">
           We&rsquo;ve received your request and will contact you shortly.
@@ -44,7 +44,7 @@ export default function PrivateTourForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full max-w-[415px] flex-col">
+    <form onSubmit={handleSubmit} className="flex w-full max-w-[518px] flex-col">
       <div className="flex flex-col gap-1">
         <input
           type="text"

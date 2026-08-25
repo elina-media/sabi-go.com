@@ -21,14 +21,14 @@ function MarqueeRow({ direction }: { direction: "left" | "right" }) {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="w-full scroll-mt-[140px] py-20">
-      <h2 className="mx-auto max-w-[701px] px-4 text-center font-sans text-[60px] font-medium leading-[1.1] text-ink">
+    <section id="reviews" className="w-full scroll-mt-[140px] py-12 md:py-20">
+      <h2 className="mx-auto max-w-[701px] px-4 text-center font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-ink md:text-[60px] md:leading-[1.1]">
         Don&rsquo;t take our word for it –{" "}
         <span className="font-accent italic text-accent">hear</span> from{" "}
         <span className="font-accent italic text-accent">travelers</span>
       </h2>
 
-      <div className="mt-16 flex flex-col gap-6">
+      <div className="mt-8 flex flex-col gap-3 md:mt-16 md:gap-6">
         <MarqueeRow direction="left" />
         <MarqueeRow direction="right" />
       </div>
