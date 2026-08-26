@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import NavbarContent from "./NavbarContent";
+import { useMobileMenu } from "./MobileMenuProvider";
 
 export default function Hero() {
+  const { isOpen } = useMobileMenu();
+
   return (
     <section id="main" className="mx-auto w-full max-w-[1920px] p-0 md:p-4">
       <div className="relative h-dvh w-full overflow-hidden rounded-none md:h-[750px] md:rounded-[40px]">
@@ -19,7 +24,11 @@ export default function Hero() {
         {/* Static header, part of the hero — scrolls away with it.
             Header.tsx is the sticky version that fades in once this
             scrolls out of view. */}
-        <nav className="absolute inset-x-4 top-4 flex h-16 items-center md:inset-x-10 md:top-10 md:h-auto">
+        <nav
+          className={`absolute inset-x-4 top-4 flex h-16 items-center md:inset-x-10 md:top-10 md:h-auto ${
+            isOpen ? "pointer-events-none md:pointer-events-auto" : ""
+          }`}
+        >
           <NavbarContent />
         </nav>
 

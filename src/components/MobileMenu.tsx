@@ -46,19 +46,11 @@ export default function MobileMenu() {
 
       {/* Side drawer — slides in from the right, above everything else. */}
       <div
-        className={`fixed inset-y-0 right-0 z-[58] flex w-[82%] max-w-[340px] flex-col gap-8 overflow-y-auto bg-ink/90 p-6 pt-24 backdrop-blur-md transition-transform duration-300 md:hidden ${
+        className={`fixed inset-y-0 right-0 z-[58] flex w-[82%] max-w-[340px] flex-col gap-8 overflow-y-auto bg-ink/90 p-6 backdrop-blur-md transition-transform duration-300 md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Image
-          src="/hero/logo.svg"
-          alt="Sabi Go Travel"
-          width={150}
-          height={36}
-          className="h-[36px] w-[150px]"
-        />
-
-        <LanguageSwitcher theme="light" />
+        <LanguageSwitcher theme="light" hoverable={false} />
 
         <ul className="flex flex-col gap-5 text-xl text-white">
           {navLinks.map((link) => (
@@ -74,22 +66,13 @@ export default function MobileMenu() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
-          <span className="flex size-[30px] items-center justify-center rounded-full bg-white">
-            <Image
-              src="/hero/whatsapp.svg"
-              alt="WhatsApp"
-              width={16}
-              height={16}
-            />
-          </span>
-          <p className="text-base text-white">+7 (777) 747 3243</p>
-        </div>
+        <p className="text-xl text-white/50">+7 (777) 747 3243</p>
 
         <a
           href="https://wa.me/77777473243"
-          className="mt-auto flex h-[50px] w-full shrink-0 items-center justify-center rounded-full bg-accent text-[18px] text-white transition-colors hover:bg-accent-hover"
+          className="mt-auto flex h-[50px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white text-[18px] text-ink transition-colors hover:bg-white/90"
         >
+          <Image src="/hero/whatsapp.svg" alt="" width={20} height={20} />
           Write on WhatsApp
         </a>
       </div>

@@ -8,8 +8,10 @@ const allLanguages = ["ENG", "RU", "KZ", "العربية"];
 
 export default function LanguageSwitcher({
   theme = "light",
+  hoverable = true,
 }: {
   theme?: "light" | "dark";
+  hoverable?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { current, setCurrent } = useLanguage();
@@ -35,12 +37,12 @@ export default function LanguageSwitcher({
     <div
       ref={containerRef}
       className="relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={hoverable ? () => setIsOpen(true) : undefined}
+      onMouseLeave={hoverable ? () => setIsOpen(false) : undefined}
     >
       <button
         type="button"
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         className={`flex items-center gap-1.5 text-base ${triggerColor}`}
       >

@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-4 top-4 z-[70] flex h-16 items-center rounded-[25px] px-4 transition-all duration-300 md:h-[100px] md:px-10 ${
-        isOpen ? "bg-transparent" : "bg-ink/40 backdrop-blur-md"
+        isOpen ? "bg-transparent pointer-events-none md:pointer-events-auto" : "bg-ink/40 backdrop-blur-md"
       } ${
         visible
           ? "translate-y-0 opacity-100"

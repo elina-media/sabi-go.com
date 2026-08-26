@@ -29,13 +29,19 @@ export default function NavbarContent({
           twice, once in Hero, once in the sticky Header). z-[60] keeps this
           row above the drawer/backdrop regardless of which instance is
           currently visible. */}
-      <div className="relative z-[60] flex w-full items-center justify-between md:hidden">
+      <div
+        className={`relative z-[60] flex w-full items-center justify-between md:hidden ${
+          isOpen ? "pointer-events-none" : ""
+        }`}
+      >
         <Image
           src={logoSrc}
           alt="Sabi Go Travel"
           width={130}
           height={31}
-          className="h-[31px] w-[130px]"
+          className={`h-[31px] w-[130px] transition-opacity duration-200 ${
+            isOpen ? "opacity-0" : "opacity-100"
+          }`}
         />
 
         <button
@@ -43,7 +49,7 @@ export default function NavbarContent({
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Menu"}
           aria-expanded={isOpen}
-          className={`flex size-11 items-center justify-center rounded-full backdrop-blur-[3.5px] ${textColor} ${
+          className={`pointer-events-auto flex size-11 items-center justify-center rounded-full backdrop-blur-[3.5px] ${textColor} ${
             theme === "dark" ? "bg-ink/10" : "bg-white/16"
           }`}
         >
