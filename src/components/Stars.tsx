@@ -19,7 +19,7 @@ export default function Stars({ rating }: { rating: number }) {
         >
           <path
             d={STAR_PATH}
-            className={i < rating ? "fill-accent" : "fill-[#e0e0e0]"}
+            className={i < rating ? "fill-accent" : "fill-star-empty"}
           />
         </svg>
       ))}

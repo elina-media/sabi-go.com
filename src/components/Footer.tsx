@@ -19,20 +19,21 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer id="contacts" className="w-full scroll-mt-[140px] p-4">
-      <div className="rounded-[24px] bg-ink p-6 md:rounded-[40px] md:p-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-6">
+      <div className="rounded-[24px] bg-ink p-6 md:portrait:rounded-[32px] md:portrait:p-10 lg:rounded-[40px] lg:p-16">
+        <div className="grid grid-cols-1 gap-8 md:portrait:grid-cols-12 md:portrait:gap-6 lg:grid-cols-12 lg:gap-6">
           <div className="col-span-3">
             <Image
               src="/hero/logo.svg"
               alt="Sabi Go Travel"
               width={193}
               height={46}
-              className="h-[38px] w-[160px] md:h-[46px] md:w-[193px]"
+              unoptimized
+              className="h-[38px] w-[160px] md:portrait:h-[42px] md:portrait:w-[175px] lg:h-[46px] lg:w-[193px]"
             />
           </div>
 
           <div className="col-span-3 flex flex-col gap-4">
-            <p className="font-sans text-lg text-white md:text-xl">
+            <p className="font-sans text-lg text-white lg:text-xl">
               Social Media &amp; Contacts
             </p>
             <div className="flex gap-2">
@@ -41,7 +42,7 @@ export default function Footer() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  className="flex size-9 items-center justify-center rounded-full bg-white transition-colors hover:bg-white/80 md:size-10"
+                  className="flex size-9 items-center justify-center rounded-full bg-white transition-colors hover:bg-white/80 lg:size-10"
                 >
                   <Image
                     src={social.icon}
@@ -53,7 +54,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-            <div className="flex flex-col gap-2 font-sans text-sm text-white/70 md:text-base">
+            <div className="flex flex-col gap-2 font-sans text-sm text-white/70 lg:text-base">
               <a href="tel:+77777473243" className="hover:text-white">
                 +7 (777) 747 3243
               </a>
@@ -67,12 +68,12 @@ export default function Footer() {
           </div>
 
           <div className="col-span-3 flex flex-col gap-2">
-            <p className="font-sans text-lg text-white md:text-xl">Menu</p>
+            <p className="font-sans text-lg text-white lg:text-xl">Menu</p>
             {menuLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-sans text-sm text-white/70 hover:text-white md:text-base"
+                className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
                 {link.label}
               </a>
@@ -80,12 +81,12 @@ export default function Footer() {
           </div>
 
           <div className="col-span-3 flex flex-col gap-2">
-            <p className="font-sans text-lg text-white md:text-xl">Documentation</p>
+            <p className="font-sans text-lg text-white lg:text-xl">Documentation</p>
             {documentationLinks.map((link) => (
               <a
                 key={link}
                 href="#"
-                className="font-sans text-sm text-white/70 hover:text-white md:text-base"
+                className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
                 {link}
               </a>
@@ -93,7 +94,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-10 font-sans text-sm text-white/50 md:mt-20">
+        <p className="mt-10 font-sans text-sm text-white/50 md:portrait:mt-16 lg:mt-20">
           TOO &ldquo;Sabi Go Travel&rdquo; 2025
         </p>
       </div>

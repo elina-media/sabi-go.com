@@ -11,7 +11,9 @@
   --color-accent: #ff4411;
   --color-accent-hover: #ff6941;
   --color-ink: #262626;
+  --color-ink-hover: #3a3a3a;
   --color-muted: #f2f2f2;
+  --color-star-empty: #e0e0e0;
   --font-sans: var(--font-neue-montreal);
   --font-accent: var(--font-pp-editorial);
 }

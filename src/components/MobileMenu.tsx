@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -11,17 +11,27 @@ const navLinks = [
   { label: "Tours", href: "#tours" },
   { label: "Private tour", href: "#private-tour" },
   { label: "Reviews", href: "#reviews" },
+  { label: "Education", href: "#" },
   { label: "Contacts", href: "#contacts" },
 ];
 
 // Rendered once at the page level (not inside NavbarContent, which mounts
 // twice — once in Hero, once in the sticky Header) so the drawer/backdrop
 // only ever exist once in the DOM regardless of which trigger opened them.
+function subscribeNoop() {
+  return () => {};
+}
+
 export default function MobileMenu() {
   const { isOpen, setIsOpen } = useMobileMenu();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  // Portals require `document.body`, which doesn't exist during SSR — this
+  // reads false on the server/first paint and true once hydrated on the
+  // client, without the extra render-effect-render cascade of setState-in-effect.
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     if (!isOpen) return;
@@ -39,14 +49,14 @@ export default function MobileMenu() {
       <div
         onClick={() => setIsOpen(false)}
         aria-hidden
-        className={`fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm transition-opacity duration-300 xl:hidden ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
 
       {/* Side drawer — slides in from the right, above everything else. */}
       <div
-        className={`fixed inset-y-0 right-0 z-[58] flex w-[82%] max-w-[340px] flex-col gap-8 overflow-y-auto bg-ink/90 p-6 backdrop-blur-md transition-transform duration-300 md:hidden ${
+        className={`fixed inset-y-0 right-0 z-[58] flex w-[82%] max-w-[340px] flex-col gap-8 overflow-y-auto bg-ink/90 p-6 backdrop-blur-md transition-transform duration-300 xl:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -72,7 +82,7 @@ export default function MobileMenu() {
           href="https://wa.me/77777473243"
           className="mt-auto flex h-[50px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white text-[18px] text-ink transition-colors hover:bg-white/90"
         >
-          <Image src="/hero/whatsapp.svg" alt="" width={20} height={20} />
+          <Image src="/hero/whatsapp.svg" alt="" width={20} height={20} unoptimized />
           Write on WhatsApp
         </a>
       </div>
