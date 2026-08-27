@@ -52,12 +52,14 @@ export async function POST(request: NextRequest) {
     appendLeadToSheet(lead),
   ]);
 
-  const failure = results.find(
+  const failures = results.filter(
     (result): result is PromiseRejectedResult => result.status === "rejected",
   );
 
-  if (failure) {
-    console.error("Lead delivery failed:", failure.reason);
+  if (failures.length > 0) {
+    for (const failure of failures) {
+      console.error("Lead delivery failed:", failure.reason);
+    }
     return NextResponse.json({ ok: false }, { status: 502 });
   }
 
