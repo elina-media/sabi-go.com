@@ -38,7 +38,7 @@ requires Node crypto).
 
 ```
 PrivateTourForm.tsx (and future forms)
-  → POST /api/lead { fullName, whatsapp, email, source, company }
+  → POST /api/lead { fullName, whatsapp, email, source, tour?, company }
   → route handler:
       - validates payload
       - honeypot check (see below)
@@ -52,6 +52,22 @@ PrivateTourForm.tsx (and future forms)
 `"tour:almaty-city-tour"`). This is the only thing that changes per caller —
 the route itself stays generic.
 
+`tour` is an optional string — the name of the specific tour the lead is
+about, when known. Populated two ways:
+
+- **Tours block on the homepage**: `TourCard`'s "Book a tour" button links to
+  `${tour.bookHref}?tour=<tour.id>` instead of the bare `bookHref` (today
+  `bookHref` is just `"#"` in Sanity for every tour, so this doesn't collide
+  with any real content yet). `PrivateTourForm` reads `?tour=` via
+  `useSearchParams()` and includes it in the POST body if present. No new
+  field is rendered in the form — this is silent, matching the requirement
+  that "Want a private tour?" itself never shows a tour picker. If the user
+  reaches the form by scrolling instead of clicking "Book a tour", `tour` is
+  omitted.
+- **Future tour detail pages** (next sub-project): that page's own booking
+  form already knows which tour it's on, so it passes `tour` as a fixed
+  value in code — no URL param needed there.
+
 ## Request contract
 
 ```ts
@@ -60,13 +76,15 @@ type LeadRequest = {
   whatsapp: string;
   email: string;
   source: string;
+  tour?: string;
   company: string; // honeypot — must be empty
 };
 ```
 
 Server-side validation: `fullName`, `whatsapp`, `email`, `source` must be
-non-empty strings, `email` must contain `@`. Missing/invalid → `400`, before
-any honeypot or integration logic runs.
+non-empty strings, `email` must contain `@`; `tour` is optional but if
+present must be a non-empty string. Missing/invalid required field → `400`,
+before any honeypot or integration logic runs.
 
 ## Spam protection
 
@@ -90,7 +108,8 @@ new with no bot traffic yet. Revisit if spam actually shows up.
 **Telegram** — plain `fetch` to
 `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage` with
 `chat_id: TELEGRAM_CHAT_ID` and a formatted text message (name, WhatsApp,
-email, source, timestamp). No SDK — it's a single REST call.
+email, source, tour if present, timestamp). No SDK — it's a single REST
+call.
 
 **Google Sheets** — `googleapis` package (official Google client),
 `google.auth.JWT` with `GOOGLE_SERVICE_ACCOUNT_EMAIL` +
@@ -99,8 +118,11 @@ email, source, timestamp). No SDK — it's a single REST call.
 `spreadsheets.values.append` on `GOOGLE_SHEET_ID`, sheet tab `Leads`,
 columns:
 
-| Timestamp (ISO) | Source | Full name | WhatsApp | Email |
-|---|---|---|---|---|
+| Timestamp (ISO) | Source | Tour | Full name | WhatsApp | Email |
+|---|---|---|---|---|---|
+
+`Tour` is blank when `tour` wasn't provided (e.g. the visitor reached the
+form by scrolling, not via a "Book a tour" button).
 
 New environment variables (added to `.env.local` locally, keys documented in
 `.env.example`, values set in Vercel project settings for deploy):
@@ -153,9 +175,12 @@ part of this design.
 ## Files touched
 
 - `src/app/api/lead/route.ts` — new, the route handler.
-- `src/components/PrivateTourForm.tsx` — add `source: "private-tour"` and
-  honeypot field to the submit payload, add `"error"` state and its UI,
-  replace the `console.log` TODO with a real `fetch("/api/lead")` call.
+- `src/components/PrivateTourForm.tsx` — add `source: "private-tour"`,
+  honeypot field, and `tour` (read from `?tour=` via `useSearchParams()`) to
+  the submit payload, add `"error"` state and its UI, replace the
+  `console.log` TODO with a real `fetch("/api/lead")` call.
+- `src/components/TourCard.tsx` — "Book a tour" link appends `?tour=<id>` to
+  `bookHref`.
 - `.env.example` — document the five new keys (no values).
 - `package.json` — add `googleapis` dependency.
 - `CLAUDE.md` — update file map / progress once implemented (per the
