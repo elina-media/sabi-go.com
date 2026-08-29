@@ -7,7 +7,7 @@
 ## Архитектура
 - Next.js 16 (App Router), TypeScript, React 19
 - Роутинг файловый, App Router. Роут пока один: `src/app/page.tsx` (весь сайт — одна страница, все блоки собраны в ней подряд)
-- API-роутов нет (`src/app/api/` отсутствует) — формы пока не отправляют данные на бэкенд
+- API-роут `src/app/api/lead/route.ts` — POST handler для сбора лидов (валидация, honeypot, интеграция с Telegram и Google Sheets)
 - `src/app/layout.tsx` — корневой layout (html/body, шрифты, `metadata`). `Header` и `Footer` рендерятся не в layout, а в `page.tsx`
 - Стили — Tailwind CSS v4, конфиг через CSS (`@theme inline` в `src/app/globals.css`), файла `tailwind.config.js` нет
 - Данные повторяющихся блоков (туры/отзывы/FAQ) — статические TS-массивы в `src/data/`, без БД
@@ -18,14 +18,20 @@
 - `src/app/globals.css` — глобальные стили, Tailwind v4 `@theme` (цвета/шрифты), keyframes анимаций марки (marquee), утилита `.marquee-fade`
 - `src/app/fonts.ts` — локальные шрифты через `next/font/local`
 - `src/app/favicon.ico` — фавикон
+- `src/app/api/lead/route.ts` — POST handler для сбора лидов: валидация `{tour, fullName, whatsapp, email, company}`, honeypot-проверка, параллельный вызов Telegram и Google Sheets, 200 только если оба вызова успешны
+- `src/lib/telegram.ts` — `sendLeadToTelegram(lead)`, отправка лида в Telegram-чат через Bot API
+- `src/lib/leadSheet.ts` — `appendLeadToSheet(lead)`, добавление строки в Google Sheet используя `googleapis` и service-account JWT
+- `src/lib/useLeadSubmit.ts` — `"use client"` shared хук для обеих форм сбора лидов (PrivateTourForm + BookingModal), управляет состоянием `idle/submitting/success/error` и `fetch("/api/lead")`
 - `src/components/Header.tsx` — sticky-хедер, появляется при скролле, `"use client"`
 - `src/components/NavbarContent.tsx` — общее содержимое navbar (лого/меню/языковой переключатель/WhatsApp), переиспользуется в `Hero.tsx` и `Header.tsx`, принимает `theme: "light" | "dark"`. На мобилке рендерит только лого + кнопку-триггер (гамбургер/крестик), сам мобильный drawer — в `MobileMenu.tsx`. `"use client"`
 - `src/components/MobileMenuProvider.tsx` — React Context для состояния мобильного меню (`isOpen`/`setIsOpen`), тот же паттерн что `LanguageProvider.tsx`; общее состояние нужно, т.к. `NavbarContent.tsx` монтируется дважды (Hero + Header). Подключён в `layout.tsx`. `"use client"`
 - `src/components/MobileMenu.tsx` — сам мобильный drawer (боковая шторка с лого/языком/меню/контактами/кнопкой), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. `"use client"`
+- `src/components/BookingModalProvider.tsx` — React Context для состояния booking-модала (`tourName`/`open`/`close`), тот же паттерн что `MobileMenuProvider.tsx`. Подключён в `layout.tsx`. `"use client"`
+- `src/components/BookingModal.tsx` — popup для выбранного тура (форма + состояние отправки), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. Использует `useBookingModal()` и `useLeadSubmit()`. `"use client"`
 - `src/components/LanguageProvider.tsx` — React Context для языка (`current`/`setCurrent`), подключён в `layout.tsx`, читается через `useLanguage()`. `"use client"`
 - `src/components/Hero.tsx` — первый экран (видео-фон + встроенный статичный navbar)
 - `src/components/Features.tsx` — блок "The little things..." (4 карточки)
-- `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`
+- `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`. `TourCard.tsx` — `"use client"` (кнопка "Book a tour" открывает `BookingModal` через `useBookingModal().open(tour.title)`)
 - `src/components/PrivateTour.tsx`, `PrivateTourForm.tsx` — форма заявки на приватный тур (`PrivateTourForm.tsx` — `"use client"`)
 - `src/components/Reviews.tsx`, `ReviewCard.tsx`, `Stars.tsx` — бесконечная карусель отзывов, данные из `src/data/reviews.ts`
 - `src/components/Faq.tsx`, `FaqItem.tsx` — аккордеон FAQ, данные из `src/data/faq.ts`, `Faq.tsx` — `"use client"`
@@ -47,11 +53,11 @@
 ## Конвенции
 - Компоненты — `PascalCase.tsx`, один компонент = один блок страницы (`src/components/{Block}.tsx`)
 - Стили — только Tailwind-классы (utility-first); кастомные токены — через `@theme inline` в `globals.css`; inline `style`, CSS-модули и styled-components не используются
-- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `LanguageProvider`, `LanguageSwitcher`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
+- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
 - Данные для повторяющихся блоков — TS-массивы в `src/data/*.ts`; каждый файл экспортирует `type` + массив, компоненты просто мапят данные — контент редактируется без изменения компонентов
 - Типы — не в отдельной папке `/types`, а прямо рядом с данными в `src/data/*.ts`
-- Отдельных папок `/hooks`, `/lib`, `/utils` пока нет — весь код лежит в компонентах
-- Переменные окружения — `.env`-файлов в проекте пока нет (формы не подключены к бэкенду, см. `TODO` в `PrivateTourForm.tsx`)
+- Общая логика (хуки, клиенты внешних API) — `src/lib/*.ts` рядом с компонентами (например `telegram.ts`, `leadSheet.ts`, `useLeadSubmit.ts`). Не в отдельных папках `/hooks`, `/utils`
+- Переменные окружения (`.env.local`): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_SHEET_ID` используются `/api/lead` для интеграции с Telegram-ботом и Google Sheets. `PrivateTourForm` и `BookingModal` отправляют данные лидов на `/api/lead` (раньше формы не отправляли данные на бэкенд)
 - Импорты — алиас `@/*` → `src/*` (например `@/components/Hero`, `@/data/tours`)
 - Ассеты — по подпапкам на блок в `/public/{имя-блока}/`, растровые изображения — WebP (кроме случаев с причиной, см. `design-system.md`)
 
@@ -61,9 +67,10 @@
 - TypeScript ^5
 - Tailwind CSS ^4 (+ `@tailwindcss/postcss`)
 - ESLint ^9 (`eslint-config-next`)
+- `googleapis` — Google Sheets API integration
 - Package manager: npm (pnpm недоступен на этой машине из-за прав corepack)
 - Деплой: Vercel
-- Формы (когда дойдём): заявки → Telegram-бот + Google Sheets
+- Интеграции: заявки → Telegram-бот + Google Sheets (реализовано через `/api/lead`)
 
 ## Статус проекта
 Начинаем с нуля. Собираем ТОЛЬКО десктопную версию, одна страница.
@@ -103,11 +110,12 @@
 - [x] Hero (включая статичный embedded navbar)
 - [x] Features ("The little things that make every trip better")
 - [x] Tours (карточки туров — data-driven, см. `src/data/tours.ts`)
-- [x] Форма заявки (Private tour) — рабочий фронт (ввод, валидация, submit-состояния), интеграция с Telegram-ботом/Google Sheets — позже, см. TODO в `PrivateTourForm.tsx`
+- [x] Форма заявки (Private tour) — рабочий фронт (ввод, валидация, submit-состояния), интеграция с Telegram-ботом/Google Sheets реализована (используется shared `useLeadSubmit` hook)
 - [x] Reviews (бесконечная карусель отзывов, 2 ряда в разные стороны — data-driven, см. `src/data/reviews.ts`)
 - [x] FAQ (аккордеон, только 1 карточка открыта одновременно — data-driven, см. `src/data/faq.ts`, реальные вопросы/ответы от пользователя, добавлены 2026-08-24)
 - [x] Футер (лого, соцсети/контакты, меню, документация, копирайт) — собран по `get_metadata` (координаты/текст), без `get_design_context`/скриншота — упёрлись в месячный лимит Figma MCP (20 запросов, Starter-план). Тёмный сплошной фон вместо фото — стоит сверить визуально когда лимит сбросится или дизайнер пришлёт скрин/ассеты. Иконки соцсетей — настоящие из Figma (прислал пользователь вручную).
 - [x] Sticky Header (`Header.tsx`) — тот же контент navbar, что в hero (общий `NavbarContent.tsx`), капсула `bg-ink/15 rounded-[25px] h-[100px] backdrop-blur-md`, белый текст. Появляется при скролле после первого блока (`window.scrollY > 700`), плавно (`opacity`/`translate-y`).
+- [x] Lead backend (Telegram + Google Sheets) — POST `/api/lead`, shared `useLeadSubmit()` hook, honeypot валидация, оба вызова успешны или 502. Две точки входа: `PrivateTourForm` (inline) + `BookingModal` (popup). См. `docs/superpowers/plans/2026-08-27-lead-backend.md`
 - [ ] (добавим следующие блоки по мере появления)
 
 ## ВАЖНО
