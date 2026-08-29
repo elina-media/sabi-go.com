@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendLeadToTelegram } from "@/lib/telegram";
 import { appendLeadToSheet } from "@/lib/leadSheet";
 
+export const runtime = "nodejs";
+
 type LeadRequestBody = {
   tour: string;
   fullName: string;

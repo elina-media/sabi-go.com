@@ -35,6 +35,13 @@ export default function BookingModal() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (tourName !== null) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tourName]);
+
   function handleClose() {
     close();
     reset();
