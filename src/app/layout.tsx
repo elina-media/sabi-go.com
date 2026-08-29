@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { neueMontreal, ppEditorialItalic } from "./fonts";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { MobileMenuProvider } from "@/components/MobileMenuProvider";
+import { BookingModalProvider } from "@/components/BookingModalProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +19,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <LanguageProvider>
-          <MobileMenuProvider>{children}</MobileMenuProvider>
+          <MobileMenuProvider>
+            <BookingModalProvider>{children}</BookingModalProvider>
+          </MobileMenuProvider>
         </LanguageProvider>
       </body>
     </html>

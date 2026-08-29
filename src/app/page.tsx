@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import MobileMenu from "@/components/MobileMenu";
+import BookingModal from "@/components/BookingModal";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Tours from "@/components/Tours";
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <Header />
       <MobileMenu />
+      <BookingModal />
       <main className="flex flex-1 flex-col">
         <Hero />
         <Features />

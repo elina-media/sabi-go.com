@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import TourGallery from "./TourGallery";
+import { useBookingModal } from "./BookingModalProvider";
 
 export default function TourCard({ tour }: { tour: Tour }) {
+  const { open } = useBookingModal();
+
   return (
     <article className="flex flex-col">
       <TourGallery images={tour.images} badge={tour.badge} />
@@ -16,12 +21,13 @@ export default function TourCard({ tour }: { tour: Tour }) {
       </span>
 
       <div className="mt-2 flex flex-col gap-1.5 md:mt-4 md:gap-2">
-        <Link
-          href={tour.bookHref}
+        <button
+          type="button"
+          onClick={() => open(tour.title)}
           className="flex h-[40px] w-full items-center justify-center rounded-full bg-accent text-sm tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover md:portrait:h-[44px] md:portrait:text-base lg:h-[48px] lg:text-lg xl:h-[50px] xl:max-w-[220px] xl:text-[22px]"
         >
           Book a tour
-        </Link>
+        </button>
         <Link
           href={tour.moreHref}
           className="flex h-[40px] w-full items-center justify-center rounded-full bg-ink text-sm tracking-[-0.5px] text-white transition-colors hover:bg-ink-hover md:portrait:h-[44px] md:portrait:text-base lg:h-[48px] lg:text-lg xl:h-[50px] xl:max-w-[220px] xl:text-[22px]"
