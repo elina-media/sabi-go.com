@@ -55,7 +55,6 @@ export default function BookingModal() {
       reset();
       // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: reset seats/whatsapp to their defaults whenever the modal is (re)opened for a tour, mirroring the existing seats reset
       setSeats(MIN_SEATS);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: see above
       setWhatsapp("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
