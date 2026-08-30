@@ -128,7 +128,7 @@ export default function BookingModal() {
               >
                 −
               </button>
-              <span className="font-sans text-sm text-ink">{seats}x</span>
+              <span aria-live="polite" className="font-sans text-sm text-ink">{seats}x</span>
               <button
                 type="button"
                 onClick={() => setSeats((s) => Math.min(MAX_SEATS, s + 1))}
