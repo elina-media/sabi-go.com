@@ -88,18 +88,23 @@ export default function BookingModal() {
   return createPortal(
     <>
       <div
-        onClick={handleClose}
         aria-hidden
         className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm"
       />
 
-      <div className="fixed inset-0 z-[71] flex items-center justify-center p-4">
-        <div className="relative flex w-full max-w-[518px] flex-col gap-4 rounded-[30px] bg-white p-6">
+      <div
+        onClick={handleClose}
+        className="fixed inset-0 z-[71] flex items-center justify-center p-4"
+      >
+        <div
+          onClick={(event) => event.stopPropagation()}
+          className="relative flex w-full max-w-[518px] flex-col gap-4 rounded-[30px] bg-white p-6"
+        >
           <button
             type="button"
             onClick={handleClose}
             aria-label="Close"
-            className="absolute right-4 top-4 text-2xl leading-none text-ink/70 transition-colors hover:text-ink"
+            className="absolute right-4 top-4 text-3xl leading-none text-ink/70 transition-colors hover:text-ink"
           >
             &times;
           </button>
