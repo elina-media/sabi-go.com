@@ -2,6 +2,8 @@ import { google } from "googleapis";
 
 type SheetLead = {
   tour: string;
+  seats: number;
+  totalPrice: string;
   fullName: string;
   whatsapp: string;
   email: string;
@@ -26,13 +28,15 @@ export async function appendLeadToSheet(lead: SheetLead): Promise<void> {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: "Leads!A:E",
+    range: "Leads!A:G",
     valueInputOption: "RAW",
     requestBody: {
       values: [
         [
           new Date().toISOString(),
           lead.tour,
+          lead.seats,
+          lead.totalPrice,
           lead.fullName,
           lead.whatsapp,
           lead.email,

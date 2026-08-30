@@ -6,6 +6,8 @@ export type LeadStatus = "idle" | "submitting" | "success" | "error";
 
 export type LeadPayload = {
   tour: string;
+  seats: number;
+  totalPrice: string;
   fullName: string;
   whatsapp: string;
   email: string;

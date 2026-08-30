@@ -6,6 +6,8 @@ export const runtime = "nodejs";
 
 type LeadRequestBody = {
   tour: string;
+  seats: number;
+  totalPrice: string;
   fullName: string;
   whatsapp: string;
   email: string;
@@ -14,6 +16,10 @@ type LeadRequestBody = {
 
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function isPositiveInteger(value: unknown): value is number {
+  return typeof value === "number" && Number.isInteger(value) && value > 0;
 }
 
 export async function POST(request: NextRequest) {
@@ -28,10 +34,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { tour, fullName, whatsapp, email, company } = body;
+  const { tour, seats, totalPrice, fullName, whatsapp, email, company } =
+    body;
 
   if (
     !isNonEmptyString(tour) ||
+    !isPositiveInteger(seats) ||
+    typeof totalPrice !== "string" ||
     !isNonEmptyString(fullName) ||
     !isNonEmptyString(whatsapp) ||
     !isNonEmptyString(email) ||
@@ -47,7 +56,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  const lead = { tour, fullName, whatsapp, email };
+  const lead = { tour, seats, totalPrice, fullName, whatsapp, email };
 
   const results = await Promise.allSettled([
     sendLeadToTelegram(lead),

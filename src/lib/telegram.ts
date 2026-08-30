@@ -1,5 +1,7 @@
 type TelegramLead = {
   tour: string;
+  seats: number;
+  totalPrice: string;
   fullName: string;
   whatsapp: string;
   email: string;
@@ -13,20 +15,24 @@ export async function sendLeadToTelegram(lead: TelegramLead): Promise<void> {
     throw new Error("Telegram env vars are not configured");
   }
 
-  const text = [
-    "New lead from sabigo.travel",
-    `Tour: ${lead.tour}`,
+  const lines = ["New lead from sabigo.travel", `Tour: ${lead.tour}`];
+
+  if (lead.totalPrice) {
+    lines.push(`Seats: ${lead.seats}`, `Total: ${lead.totalPrice}`);
+  }
+
+  lines.push(
     `Name: ${lead.fullName}`,
     `WhatsApp: ${lead.whatsapp}`,
     `Email: ${lead.email}`,
-  ].join("\n");
+  );
 
   const response = await fetch(
     `https://api.telegram.org/bot${token}/sendMessage`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text }),
+      body: JSON.stringify({ chat_id: chatId, text: lines.join("\n") }),
     },
   );
 

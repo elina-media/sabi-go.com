@@ -54,6 +54,8 @@ export default function BookingModal() {
     const form = event.currentTarget;
     await submit({
       tour: tourName,
+      seats: 1,
+      totalPrice: "",
       fullName: (form.elements.namedItem("fullName") as HTMLInputElement)
         .value,
       whatsapp: (form.elements.namedItem("whatsapp") as HTMLInputElement)
