@@ -23,7 +23,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
       <div className="mt-2 flex flex-col gap-1.5 md:mt-4 md:gap-2">
         <button
           type="button"
-          onClick={() => open(tour.title)}
+          onClick={() => open(tour)}
           className="flex h-[40px] w-full items-center justify-center rounded-full bg-accent text-sm tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover md:portrait:h-[44px] md:portrait:text-base lg:h-[48px] lg:text-lg xl:h-[50px] xl:max-w-[220px] xl:text-[22px]"
         >
           Book a tour

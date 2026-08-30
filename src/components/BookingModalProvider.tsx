@@ -1,10 +1,11 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type { Tour } from "@/data/tours";
 
 type BookingModalContextValue = {
-  tourName: string | null;
-  open: (tourName: string) => void;
+  tour: Tour | null;
+  open: (tour: Tour) => void;
   close: () => void;
 };
 
@@ -13,14 +14,14 @@ const BookingModalContext = createContext<BookingModalContextValue | null>(
 );
 
 export function BookingModalProvider({ children }: { children: ReactNode }) {
-  const [tourName, setTourName] = useState<string | null>(null);
+  const [tour, setTour] = useState<Tour | null>(null);
 
   return (
     <BookingModalContext.Provider
       value={{
-        tourName,
-        open: (name: string) => setTourName(name),
-        close: () => setTourName(null),
+        tour,
+        open: (nextTour: Tour) => setTour(nextTour),
+        close: () => setTour(null),
       }}
     >
       {children}
