@@ -18,20 +18,21 @@
 - `src/app/globals.css` — глобальные стили, Tailwind v4 `@theme` (цвета/шрифты), keyframes анимаций марки (marquee), утилита `.marquee-fade`
 - `src/app/fonts.ts` — локальные шрифты через `next/font/local`
 - `src/app/favicon.ico` — фавикон
-- `src/app/api/lead/route.ts` — POST handler для сбора лидов: валидация `{tour, fullName, whatsapp, email, company}`, honeypot-проверка, параллельный вызов Telegram и Google Sheets, 200 только если оба вызова успешны
-- `src/lib/telegram.ts` — `sendLeadToTelegram(lead)`, отправка лида в Telegram-чат через Bot API
-- `src/lib/leadSheet.ts` — `appendLeadToSheet(lead)`, добавление строки в Google Sheet используя `googleapis` и service-account JWT
+- `src/app/api/lead/route.ts` — POST handler для сбора лидов: валидация `{tour, seats, totalPrice, fullName, whatsapp, email, company}`, honeypot-проверка, параллельный вызов Telegram и Google Sheets, 200 только если оба вызова успешны
+- `src/lib/telegram.ts` — `sendLeadToTelegram(lead)`, отправка лида в Telegram-чат через Bot API, строки Seats/Total только если `totalPrice` не пустой
+- `src/lib/leadSheet.ts` — `appendLeadToSheet(lead)`, добавление строки в Google Sheet (`Timestamp|Tour|Seats|Total price|Full name|WhatsApp|Email`) используя `googleapis` и service-account JWT
 - `src/lib/useLeadSubmit.ts` — `"use client"` shared хук для обеих форм сбора лидов (PrivateTourForm + BookingModal), управляет состоянием `idle/submitting/success/error` и `fetch("/api/lead")`
 - `src/components/Header.tsx` — sticky-хедер, появляется при скролле, `"use client"`
 - `src/components/NavbarContent.tsx` — общее содержимое navbar (лого/меню/языковой переключатель/WhatsApp), переиспользуется в `Hero.tsx` и `Header.tsx`, принимает `theme: "light" | "dark"`. На мобилке рендерит только лого + кнопку-триггер (гамбургер/крестик), сам мобильный drawer — в `MobileMenu.tsx`. `"use client"`
 - `src/components/MobileMenuProvider.tsx` — React Context для состояния мобильного меню (`isOpen`/`setIsOpen`), тот же паттерн что `LanguageProvider.tsx`; общее состояние нужно, т.к. `NavbarContent.tsx` монтируется дважды (Hero + Header). Подключён в `layout.tsx`. `"use client"`
 - `src/components/MobileMenu.tsx` — сам мобильный drawer (боковая шторка с лого/языком/меню/контактами/кнопкой), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. `"use client"`
-- `src/components/BookingModalProvider.tsx` — React Context для состояния booking-модала (`tourName`/`open`/`close`), тот же паттерн что `MobileMenuProvider.tsx`. Подключён в `layout.tsx`. `"use client"`
-- `src/components/BookingModal.tsx` — popup для выбранного тура (форма + состояние отправки), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. Использует `useBookingModal()` и `useLeadSubmit()`. `"use client"`
+- `src/components/BookingModalProvider.tsx` — React Context для состояния booking-модала (`tour: Tour | null`/`open(tour)`/`close()`), тот же паттерн что `MobileMenuProvider.tsx`. Подключён в `layout.tsx`. `"use client"`
+- `src/components/BookingModal.tsx` — светлый popup для выбранного тура: карточка тура (фото/название/степпер мест 1–10/растущая цена через `priceForSeats`), форма + состояние отправки. Рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. Использует `useBookingModal()` и `useLeadSubmit()`. `"use client"`
+- `src/components/PhoneInput.tsx` — общий инпут номера WhatsApp с маской и выбором страны (обёртка над `react-phone-number-input`, дефолт Казахстан, любая страна доступна), переиспользуется в `PrivateTourForm` и `BookingModal`. Единственный не-Tailwind CSS в проекте (`react-phone-number-input/style.css`, см. `design-system.md`). `"use client"`
 - `src/components/LanguageProvider.tsx` — React Context для языка (`current`/`setCurrent`), подключён в `layout.tsx`, читается через `useLanguage()`. `"use client"`
 - `src/components/Hero.tsx` — первый экран (видео-фон + встроенный статичный navbar)
 - `src/components/Features.tsx` — блок "The little things..." (4 карточки)
-- `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`. `TourCard.tsx` — `"use client"` (кнопка "Book a tour" открывает `BookingModal` через `useBookingModal().open(tour.title)`)
+- `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`. `TourCard.tsx` — `"use client"` (кнопка "Book a tour" открывает `BookingModal` через `useBookingModal().open(tour)`, передаёт весь объект тура — нужны фото/цена для попапа)
 - `src/components/PrivateTour.tsx`, `PrivateTourForm.tsx` — форма заявки на приватный тур (`PrivateTourForm.tsx` — `"use client"`)
 - `src/components/Reviews.tsx`, `ReviewCard.tsx`, `Stars.tsx` — бесконечная карусель отзывов, данные из `src/data/reviews.ts`
 - `src/components/Faq.tsx`, `FaqItem.tsx` — аккордеон FAQ, данные из `src/data/faq.ts`, `Faq.tsx` — `"use client"`
@@ -53,7 +54,7 @@
 ## Конвенции
 - Компоненты — `PascalCase.tsx`, один компонент = один блок страницы (`src/components/{Block}.tsx`)
 - Стили — только Tailwind-классы (utility-first); кастомные токены — через `@theme inline` в `globals.css`; inline `style`, CSS-модули и styled-components не используются
-- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
+- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `PhoneInput`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
 - Данные для повторяющихся блоков — TS-массивы в `src/data/*.ts`; каждый файл экспортирует `type` + массив, компоненты просто мапят данные — контент редактируется без изменения компонентов
 - Типы — не в отдельной папке `/types`, а прямо рядом с данными в `src/data/*.ts`
 - Общая логика (хуки, клиенты внешних API) — `src/lib/*.ts` рядом с компонентами (например `telegram.ts`, `leadSheet.ts`, `useLeadSubmit.ts`). Не в отдельных папках `/hooks`, `/utils`
@@ -68,6 +69,7 @@
 - Tailwind CSS ^4 (+ `@tailwindcss/postcss`)
 - ESLint ^9 (`eslint-config-next`)
 - `googleapis` — Google Sheets API integration
+- `react-phone-number-input` — маска/валидация номера WhatsApp с выбором страны (`PhoneInput.tsx`)
 - Package manager: npm (pnpm недоступен на этой машине из-за прав corepack)
 - Деплой: Vercel
 - Интеграции: заявки → Telegram-бот + Google Sheets (реализовано через `/api/lead`)
@@ -116,6 +118,8 @@
 - [x] Футер (лого, соцсети/контакты, меню, документация, копирайт) — собран по `get_metadata` (координаты/текст), без `get_design_context`/скриншота — упёрлись в месячный лимит Figma MCP (20 запросов, Starter-план). Тёмный сплошной фон вместо фото — стоит сверить визуально когда лимит сбросится или дизайнер пришлёт скрин/ассеты. Иконки соцсетей — настоящие из Figma (прислал пользователь вручную).
 - [x] Sticky Header (`Header.tsx`) — тот же контент navbar, что в hero (общий `NavbarContent.tsx`), капсула `bg-ink/15 rounded-[25px] h-[100px] backdrop-blur-md`, белый текст. Появляется при скролле после первого блока (`window.scrollY > 700`), плавно (`opacity`/`translate-y`).
 - [x] Lead backend (Telegram + Google Sheets) — POST `/api/lead`, shared `useLeadSubmit()` hook, honeypot валидация, оба вызова успешны или 502. Две точки входа: `PrivateTourForm` (inline) + `BookingModal` (popup). См. `docs/superpowers/plans/2026-08-27-lead-backend.md`
+- [x] Редизайн `BookingModal` — светлая тема, карточка тура с фото/степпером мест (1–10)/растущей ценой, `seats`/`totalPrice` уходят в Telegram/Sheets. См. `docs/superpowers/plans/2026-08-29-booking-modal-redesign.md`
+- [x] Маска номера WhatsApp — `PhoneInput.tsx` (флаг страны, дефолт Казахстан, любая страна доступна), отправка заблокирована пока номер не полный. В обеих формах. См. `docs/superpowers/plans/2026-08-30-phone-input-mask.md`
 - [ ] (добавим следующие блоки по мере появления)
 
 ## ВАЖНО
