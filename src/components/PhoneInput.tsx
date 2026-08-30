@@ -22,7 +22,11 @@ function EmojiFlag({ country }: { country?: string }) {
           .map((char) => 127397 + char.charCodeAt(0)),
       )
     : "";
-  return <span className="text-[15px] leading-none">{emoji}</span>;
+  return (
+    <span className="flex size-5 items-center justify-center text-[20px] leading-none">
+      {emoji}
+    </span>
+  );
 }
 
 export default function PhoneInput({
@@ -43,7 +47,7 @@ export default function PhoneInput({
       onChange={(next) => onChange(next ?? "")}
       flagComponent={EmojiFlag}
       placeholder="WhatsApp number"
-      className={`flex h-[50px] w-full items-center rounded-[70px] ${backgroundClassName[background]} px-6 font-sans text-[20px] text-ink focus-within:ring-2 focus-within:ring-accent [&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:w-full [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:font-sans [&_.PhoneInputInput]:text-[20px] [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/50`}
+      className={`flex h-[50px] w-full items-center rounded-[70px] ${backgroundClassName[background]} px-6 font-sans text-[20px] text-ink focus-within:ring-2 focus-within:ring-accent [&_.PhoneInputCountry]:flex [&_.PhoneInputCountry]:items-center [&_.PhoneInputCountryIcon]:flex [&_.PhoneInputCountryIcon]:h-5 [&_.PhoneInputCountryIcon]:w-5 [&_.PhoneInputCountryIcon]:items-center [&_.PhoneInputCountryIcon]:justify-center [&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:w-full [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:font-sans [&_.PhoneInputInput]:text-[20px] [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/50`}
     />
   );
 }
