@@ -1,13 +1,16 @@
 "use client";
 
-import { type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import { useLeadSubmit } from "@/lib/useLeadSubmit";
+import PhoneInput from "./PhoneInput";
 
 const inputClassName =
   "h-[50px] w-full rounded-[70px] bg-white px-6 font-sans text-[20px] text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
 
 export default function PrivateTourForm() {
   const { status, submit } = useLeadSubmit();
+  const [whatsapp, setWhatsapp] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -19,8 +22,7 @@ export default function PrivateTourForm() {
       totalPrice: "",
       fullName: (form.elements.namedItem("fullName") as HTMLInputElement)
         .value,
-      whatsapp: (form.elements.namedItem("whatsapp") as HTMLInputElement)
-        .value,
+      whatsapp,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       company: (form.elements.namedItem("company") as HTMLInputElement)
         .value,
@@ -60,14 +62,7 @@ export default function PrivateTourForm() {
           autoComplete="name"
           className={inputClassName}
         />
-        <input
-          type="tel"
-          name="whatsapp"
-          required
-          placeholder="WhatsApp number"
-          autoComplete="tel"
-          className={inputClassName}
-        />
+        <PhoneInput value={whatsapp} onChange={setWhatsapp} background="white" />
         <input
           type="email"
           name="email"
@@ -86,7 +81,7 @@ export default function PrivateTourForm() {
 
       <button
         type="submit"
-        disabled={status === "submitting"}
+        disabled={status === "submitting" || !isValidPhoneNumber(whatsapp)}
         className="mt-2 flex h-[50px] w-full items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Submit a request"}

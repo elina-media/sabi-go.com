@@ -8,8 +8,10 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import { useBookingModal } from "./BookingModalProvider";
 import { useLeadSubmit } from "@/lib/useLeadSubmit";
+import PhoneInput from "./PhoneInput";
 
 const inputClassName =
   "h-[50px] w-full rounded-[70px] bg-muted px-6 font-sans text-[20px] text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
@@ -31,6 +33,7 @@ export default function BookingModal() {
   const { tour, close } = useBookingModal();
   const { status, submit, reset } = useLeadSubmit();
   const [seats, setSeats] = useState(MIN_SEATS);
+  const [whatsapp, setWhatsapp] = useState("");
   const isOpen = tour !== null;
 
   const mounted = useSyncExternalStore(
@@ -50,8 +53,10 @@ export default function BookingModal() {
   useEffect(() => {
     if (tour !== null) {
       reset();
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: reset seats to 1 whenever the modal is (re)opened for a tour, see Step 6 trace
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: reset seats/whatsapp to their defaults whenever the modal is (re)opened for a tour, mirroring the existing seats reset
       setSeats(MIN_SEATS);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: see above
+      setWhatsapp("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tour]);
@@ -72,8 +77,7 @@ export default function BookingModal() {
       totalPrice: priceForSeats(tour.price, seats),
       fullName: (form.elements.namedItem("fullName") as HTMLInputElement)
         .value,
-      whatsapp: (form.elements.namedItem("whatsapp") as HTMLInputElement)
-        .value,
+      whatsapp,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       company: (form.elements.namedItem("company") as HTMLInputElement)
         .value,
@@ -176,14 +180,7 @@ export default function BookingModal() {
                 autoComplete="name"
                 className={inputClassName}
               />
-              <input
-                type="tel"
-                name="whatsapp"
-                required
-                placeholder="WhatsApp number"
-                autoComplete="tel"
-                className={inputClassName}
-              />
+              <PhoneInput value={whatsapp} onChange={setWhatsapp} background="muted" />
               <input
                 type="email"
                 name="email"
@@ -201,7 +198,7 @@ export default function BookingModal() {
 
               <button
                 type="submit"
-                disabled={status === "submitting"}
+                disabled={status === "submitting" || !isValidPhoneNumber(whatsapp)}
                 className="mt-2 flex h-[50px] w-full items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
               >
                 {status === "submitting" ? "Sending…" : "Submit a request"}
