@@ -9,6 +9,22 @@ const backgroundClassName: Record<Background, string> = {
   muted: "bg-muted",
 };
 
+/**
+ * Regional-indicator emoji flag from an ISO 3166-1 alpha-2 country code
+ * (e.g. "KZ" -> 🇰🇿) — no flag-image library/data needed.
+ */
+function EmojiFlag({ country }: { country?: string }) {
+  const emoji = country
+    ? String.fromCodePoint(
+        ...country
+          .toUpperCase()
+          .split("")
+          .map((char) => 127397 + char.charCodeAt(0)),
+      )
+    : "";
+  return <span className="text-[15px] leading-none">{emoji}</span>;
+}
+
 export default function PhoneInput({
   value,
   onChange,
@@ -22,8 +38,10 @@ export default function PhoneInput({
     <PhoneNumberInput
       international
       defaultCountry="KZ"
+      limitMaxLength
       value={value}
       onChange={(next) => onChange(next ?? "")}
+      flagComponent={EmojiFlag}
       placeholder="WhatsApp number"
       className={`flex h-[50px] w-full items-center rounded-[70px] ${backgroundClassName[background]} px-6 font-sans text-[20px] text-ink focus-within:ring-2 focus-within:ring-accent [&_.PhoneInputInput]:h-full [&_.PhoneInputInput]:w-full [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:font-sans [&_.PhoneInputInput]:text-[20px] [&_.PhoneInputInput]:text-ink [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:placeholder:text-ink/50`}
     />

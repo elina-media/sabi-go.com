@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import "react-phone-number-input/style.css";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -70,4 +70,15 @@ body {
     black 90%,
     transparent
   );
+}
+
+/* PhoneInput (react-phone-number-input) uses an emoji flag, not an image,
+   so the library's default bordered/tinted background for the flag icon
+   (meant to frame a flag image while it loads) looks like a stray gray
+   box around the emoji — strip it. Plain CSS, not a Tailwind utility,
+   because the class name's double hyphen isn't picked up by Tailwind's
+   arbitrary-variant selector scanner. */
+.PhoneInputCountryIcon--border {
+  box-shadow: none;
+  background-color: transparent;
 }
