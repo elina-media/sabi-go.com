@@ -12,7 +12,7 @@ export default function Tours() {
         waiting – pick one
       </h2>
 
-      <div className="mt-8 grid grid-cols-2 gap-4 md:mt-16 md:portrait:grid-cols-3 lg:grid-cols-3 lg:gap-6">
+      <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:mt-16 md:portrait:grid-cols-3 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-10">
         {tours.map((tour) => (
           <TourCard key={tour.id} tour={tour} />
         ))}

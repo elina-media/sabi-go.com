@@ -41,9 +41,30 @@ export const tours: Tour[] = [
         src: "/tours/kolsai-kaindy-moon-canyon.webp",
         alt: "Kolsai Lake surrounded by pine forest and mountains",
       },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
+        alt: "Tourists boarding boats at the Kolsai Lake dock",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
+        alt: "Aerial view of Kaindy Lake's sunken forest",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-4.webp",
+        alt: "Kolsai Lake surrounded by snow-capped mountain peaks",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-5.webp",
+        alt: "Turquoise waters of Kaindy Lake with sunken trees",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-6.webp",
+        alt: "Wooden walkway along Kolsai Lake with mountain backdrop",
+      },
     ],
     badge: "every day",
-    description: "",
+    description:
+      "Moon Canyon, the mysterious sunken forest of Kaindy Lake, and the crystal-clear waters of Kolsai Lake — all in one unforgettable day. A scenic journey through Kazakhstan's mountains, with breathtaking landscapes, a local lunch and plenty of time to explore.",
     timing: [],
     inclusive: [],
     exclusive: [],
