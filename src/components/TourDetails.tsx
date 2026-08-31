@@ -17,7 +17,7 @@ export default function TourDetails({ tour }: { tour: Tour }) {
   >(null);
 
   return (
-    <section className="mx-auto w-full max-w-[800px] px-4 py-6 md:py-20">
+    <section className="mx-auto w-full max-w-[1067px] px-4 py-6 md:py-20">
       <div className="flex flex-col gap-2">
         {categories.map(({ key, label }) => {
           const items = tour[key];
