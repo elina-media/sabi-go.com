@@ -103,7 +103,8 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    description: "",
+    description:
+      "Moon Canyon, Black Canyon and the dramatic Charyn Canyon, turquoise Kolsai Lake and the sunken forest of Kaindy Lake — two days of Kazakhstan's most spectacular mountain landscapes, with cozy accommodation, local food and an unforgettable road trip through the wild.",
     timing: [],
     inclusive: [],
     exclusive: [],
