@@ -24,9 +24,12 @@ function subscribeNoop() {
 }
 
 function priceForSeats(price: string, seats: number): string {
-  const perSeat = parseInt(price.replace(/[^0-9]/g, ""), 10);
+  const match = price.match(/[\d.]+/);
+  if (!match) return price;
+  const perSeat = parseFloat(match[0]);
   if (Number.isNaN(perSeat)) return price;
-  return `$${perSeat * seats}`;
+  const total = perSeat * seats;
+  return `$${Number.isInteger(total) ? total : total.toFixed(2)}`;
 }
 
 export default function BookingModal() {

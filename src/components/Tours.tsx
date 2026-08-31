@@ -1,9 +1,7 @@
-import { getTours } from "@/lib/queries";
+import { tours } from "@/data/tours";
 import TourCard from "./TourCard";
 
-export default async function Tours() {
-  const tours = await getTours();
-
+export default function Tours() {
   return (
     <section
       id="tours"
