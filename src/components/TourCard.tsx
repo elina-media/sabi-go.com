@@ -29,7 +29,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
           Book a tour
         </button>
         <Link
-          href={tour.moreHref}
+          href={`/tours/${tour.id}`}
           className="flex h-[40px] w-full items-center justify-center rounded-full bg-ink text-sm tracking-[-0.5px] text-white transition-colors hover:bg-ink-hover md:portrait:h-[44px] md:portrait:text-base lg:h-[48px] lg:text-lg xl:h-[50px] xl:max-w-[220px] xl:text-[22px]"
         >
           More
