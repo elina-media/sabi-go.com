@@ -51,7 +51,7 @@ export default function TourGallerySlider({
   }
 
   return (
-    <section className="mx-auto w-full max-w-[1280px] px-4 py-12 md:py-20">
+    <section className="mx-auto w-full max-w-[1280px] px-4 py-6 md:py-20">
       <div className="relative h-[300px] w-full overflow-hidden rounded-[24px] md:portrait:h-[420px] lg:h-[500px] xl:h-[600px]">
         <Image
           src={images[index].src}
