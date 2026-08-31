@@ -170,10 +170,28 @@ export const tours: Tour[] = [
     badge: "every day",
     description:
       "Big Almaty Lake surrounded by the peaks of the Trans-Ili Alatau, followed by an impressive falconry show. A perfect day trip from Almaty combining breathtaking mountain scenery, fresh air, free time by the lake and a unique look into Kazakhstan's nomadic traditions.",
-    timing: [],
-    inclusive: [],
-    exclusive: [],
-    additionalInfo: [],
+    timing: [
+      "7:00 — Guest pickup at the hotel",
+      "10:00 — Arrival at Big Almaty Lake",
+      "10:00–14:00 — Free time at Big Almaty Lake",
+      "15:00 — Arrival at the hotel parking lot",
+      "16:00–16:40 — Falconry show",
+      "17:30 — Return to Almaty",
+    ],
+    inclusive: [
+      "Pickup from the meeting point",
+      "Transportation",
+      "English-speaking guide",
+      "Entrance tickets to all national parks",
+      "Lunch box",
+      "Bottled water",
+    ],
+    exclusive: ["Horseback riding", "Taxi at certain locations"],
+    additionalInfo: [
+      "$60 per person — hiking route + falconry show",
+      "$80 per person — car ride",
+      "Tours run every day",
+    ],
   },
   {
     id: "oi-qaragai-mountain-resort",
