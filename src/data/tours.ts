@@ -4,24 +4,31 @@ export type TourImage = {
 };
 
 export type Tour = {
-  /** Unique, stable id — used as the React key and (later) the tour detail slug. */
+  /** Unique, stable id — used as the React key and the tour detail slug (/tours/[id]). */
   id: string;
   /** Card title. Wraps naturally, no manual line breaks needed. */
   title: string;
   /** Display price, formatted exactly as it should appear (e.g. "$60"). */
   price: string;
   /**
-   * Photos under /public/tours. One photo = no gallery arrows shown.
-   * Add more entries once there are extra photos for a tour to enable
-   * the arrow/dot gallery in the card automatically.
+   * Photos under /public/tours. Feeds the card gallery (TourGallery), the
+   * detail page hero background (first photo), and the detail page photo
+   * slider (full array). One photo = no gallery arrows/thumbnails shown
+   * anywhere. Add more entries once there are extra photos for a tour.
    */
   images: TourImage[];
   /** Small pill on the photo, e.g. "every day". Omit to hide it. */
   badge?: string;
-  /** Where "Book a tour" links to. */
-  bookHref: string;
-  /** Where "More" links to. */
-  moreHref: string;
+  /** Short subtitle shown under the title on the tour detail page hero. */
+  description: string;
+  /** Detail page accordion: bullet points under "Timing". */
+  timing: string[];
+  /** Detail page accordion: bullet points under "Inclusive". */
+  inclusive: string[];
+  /** Detail page accordion: bullet points under "Exclusive". */
+  exclusive: string[];
+  /** Detail page accordion: bullet points under "Additional information". */
+  additionalInfo: string[];
 };
 
 export const tours: Tour[] = [
@@ -36,8 +43,11 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    bookHref: "#",
-    moreHref: "#",
+    description: "",
+    timing: [],
+    inclusive: [],
+    exclusive: [],
+    additionalInfo: [],
   },
   {
     id: "kolsai-kaindy-charyn-black-moon-2-day",
@@ -51,8 +61,11 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    bookHref: "#",
-    moreHref: "#",
+    description: "",
+    timing: [],
+    inclusive: [],
+    exclusive: [],
+    additionalInfo: [],
   },
   {
     id: "big-almaty-lake-falcon-show",
@@ -65,8 +78,11 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    bookHref: "#",
-    moreHref: "#",
+    description: "",
+    timing: [],
+    inclusive: [],
+    exclusive: [],
+    additionalInfo: [],
   },
   {
     id: "oi-qaragai-mountain-resort",
@@ -79,7 +95,10 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    bookHref: "#",
-    moreHref: "#",
+    description: "",
+    timing: [],
+    inclusive: [],
+    exclusive: [],
+    additionalInfo: [],
   },
 ];
