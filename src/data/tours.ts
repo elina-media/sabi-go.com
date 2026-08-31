@@ -168,7 +168,8 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    description: "",
+    description:
+      "Big Almaty Lake surrounded by the peaks of the Trans-Ili Alatau, followed by an impressive falconry show. A perfect day trip from Almaty combining breathtaking mountain scenery, fresh air, free time by the lake and a unique look into Kazakhstan's nomadic traditions.",
     timing: [],
     inclusive: [],
     exclusive: [],
