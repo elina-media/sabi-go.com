@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { AnchorHTMLAttributes, MouseEvent } from "react";
 
 export default function ScrollLink({
@@ -7,13 +9,37 @@ export default function ScrollLink({
   onClick,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement>) {
-  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    onClick?.(event);
-    event.preventDefault();
-    const id = href?.slice(1);
-    if (!id) return;
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const pathname = usePathname();
+  const id = href?.slice(1);
+
+  if (!id) {
+    return (
+      <a
+        href="#"
+        onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+          onClick?.(event);
+          event.preventDefault();
+        }}
+        {...props}
+      />
+    );
   }
 
-  return <a href={href} onClick={handleClick} {...props} />;
+  // Section lives on the home page — from any other page, navigate there
+  // instead of silently failing to find the id on the current page.
+  if (pathname !== "/") {
+    return <Link href={`/#${id}`} onClick={onClick} {...props} />;
+  }
+
+  return (
+    <a
+      href={href}
+      onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+        onClick?.(event);
+        event.preventDefault();
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }}
+      {...props}
+    />
+  );
 }
