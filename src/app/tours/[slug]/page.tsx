@@ -4,6 +4,7 @@ import { tours } from "@/data/tours";
 import TourHero from "@/components/TourHero";
 import TourGallerySlider from "@/components/TourGallerySlider";
 import TourDetails from "@/components/TourDetails";
+import PrivateTour from "@/components/PrivateTour";
 
 export async function generateMetadata({
   params,
@@ -34,6 +35,7 @@ export default async function TourPage({
       <TourHero tour={tour} />
       <TourGallerySlider images={tour.images} />
       <TourDetails tour={tour} />
+      <PrivateTour />
     </main>
   );
 }
