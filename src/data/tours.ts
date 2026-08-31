@@ -239,6 +239,10 @@ export const tours: Tour[] = [
       "Bottled water",
     ],
     exclusive: ["Horseback riding", "Taxi at certain locations"],
-    additionalInfo: [],
+    additionalInfo: [
+      "$60 per person — hiking route + falconry show",
+      "$80 per person — car ride",
+      "Tours run every day",
+    ],
   },
 ];
