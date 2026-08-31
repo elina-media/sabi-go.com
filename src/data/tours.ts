@@ -230,8 +230,15 @@ export const tours: Tour[] = [
       "11:30–12:00 — Check-out",
       "13:30–14:00 — Return to Almaty",
     ],
-    inclusive: [],
-    exclusive: [],
+    inclusive: [
+      "Pickup from the meeting point",
+      "Transportation",
+      "English-speaking guide",
+      "Entrance tickets to all national parks",
+      "Lunch box",
+      "Bottled water",
+    ],
+    exclusive: ["Horseback riding", "Taxi at certain locations"],
     additionalInfo: [],
   },
 ];
