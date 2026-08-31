@@ -3,6 +3,7 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MenuToggleIcon from "./MenuToggleIcon";
+import ScrollLink from "./ScrollLink";
 import { useMobileMenu } from "./MobileMenuProvider";
 
 const navLinks = [
@@ -66,9 +67,9 @@ export default function NavbarContent({
         <ul className={`flex items-center justify-center gap-6 text-base ${textColor}`}>
           {navLinks.map((link) => (
             <li key={link.label} className="whitespace-nowrap">
-              <a href={link.href} className="transition-colors hover:text-accent">
+              <ScrollLink href={link.href} className="transition-colors hover:text-accent">
                 {link.label}
-              </a>
+              </ScrollLink>
             </li>
           ))}
         </ul>

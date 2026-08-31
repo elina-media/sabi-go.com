@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import NavbarContent from "./NavbarContent";
+import ScrollLink from "./ScrollLink";
 import { useMobileMenu } from "./MobileMenuProvider";
 
 export default function Hero() {
@@ -51,7 +52,7 @@ export default function Hero() {
             with carefully planned tours and local guides.
           </p>
 
-          <a
+          <ScrollLink
             href="#tours"
             className="pointer-events-auto flex h-[50px] items-center gap-2 rounded-full bg-accent px-7 text-white transition-colors hover:bg-accent-hover"
           >
@@ -63,7 +64,7 @@ export default function Hero() {
               unoptimized
             />
             <span className="text-[22px] tracking-[-0.5px]">View tours</span>
-          </a>
+          </ScrollLink>
         </div>
       </div>
     </section>

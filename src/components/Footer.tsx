@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollLink from "./ScrollLink";
 
 const menuLinks = [
   { label: "Main", href: "#main" },
@@ -38,7 +39,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-2">
               {socialLinks.map((social) => (
-                <a
+                <ScrollLink
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
@@ -51,7 +52,7 @@ export default function Footer() {
                     height={16}
                     unoptimized
                   />
-                </a>
+                </ScrollLink>
               ))}
             </div>
             <div className="flex flex-col gap-2 font-sans text-sm text-white/70 lg:text-base">
@@ -70,26 +71,26 @@ export default function Footer() {
           <div className="col-span-3 flex flex-col gap-2">
             <p className="font-sans text-lg text-white lg:text-xl">Menu</p>
             {menuLinks.map((link) => (
-              <a
+              <ScrollLink
                 key={link.label}
                 href={link.href}
                 className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
                 {link.label}
-              </a>
+              </ScrollLink>
             ))}
           </div>
 
           <div className="col-span-3 flex flex-col gap-2">
             <p className="font-sans text-lg text-white lg:text-xl">Documentation</p>
             {documentationLinks.map((link) => (
-              <a
+              <ScrollLink
                 key={link}
                 href="#"
                 className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
                 {link}
-              </a>
+              </ScrollLink>
             ))}
           </div>
         </div>

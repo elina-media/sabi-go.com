@@ -4,6 +4,7 @@ import { useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ScrollLink from "./ScrollLink";
 import { useMobileMenu } from "./MobileMenuProvider";
 
 const navLinks = [
@@ -65,13 +66,13 @@ export default function MobileMenu() {
         <ul className="flex flex-col gap-5 text-xl text-white">
           {navLinks.map((link) => (
             <li key={link.label}>
-              <a
+              <ScrollLink
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="transition-colors hover:text-accent"
               >
                 {link.label}
-              </a>
+              </ScrollLink>
             </li>
           ))}
         </ul>
