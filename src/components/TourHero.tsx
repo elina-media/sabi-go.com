@@ -35,7 +35,7 @@ export default function TourHero({ tour }: { tour: Tour }) {
         </nav>
 
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-4 text-center max-lg:landscape:gap-3 md:portrait:gap-6 lg:gap-6">
-          <h1 className="max-w-3xl font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-white md:portrait:text-[44px] md:portrait:leading-[1.15] md:text-[60px] md:leading-[1.1]">
+          <h1 className="max-w-3xl font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-white md:portrait:text-[44px] md:portrait:leading-[1.15] md:max-w-5xl md:text-[60px] md:leading-[1.1]">
             {tour.title}
           </h1>
 
