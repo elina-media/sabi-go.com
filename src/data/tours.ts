@@ -204,7 +204,8 @@ export const tours: Tour[] = [
       },
     ],
     badge: "every day",
-    description: "",
+    description:
+      "A three-day escape to Oi-Qaragai Mountain Resort, surrounded by forests and mountain landscapes. Slow mornings, cozy accommodation and a huge choice of activities — hiking, horseback riding, ziplining, golf, archery, climbing and spa time. The perfect mix of adventure and complete relaxation just outside Almaty.",
     timing: [],
     inclusive: [],
     exclusive: [],
