@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import MobileMenu from "@/components/MobileMenu";
 import BookingModal from "@/components/BookingModal";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <LanguageProvider>
           <MobileMenuProvider>
             <BookingModalProvider>
+              <ScrollToTop />
               <Header />
               <MobileMenu />
               <BookingModal />
