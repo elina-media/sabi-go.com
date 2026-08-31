@@ -101,6 +101,26 @@ export const tours: Tour[] = [
         src: "/tours/kolsai-kaindy-charyn-black-moon-2-day.webp",
         alt: "Canyon landscape with layered rock formations",
       },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
+        alt: "Tourists boarding boats at the Kolsai Lake dock",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
+        alt: "Aerial view of Kaindy Lake's sunken forest",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-4.webp",
+        alt: "Kolsai Lake surrounded by snow-capped mountain peaks",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-5.webp",
+        alt: "Turquoise waters of Kaindy Lake with sunken trees",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-6.webp",
+        alt: "Wooden walkway along Kolsai Lake with mountain backdrop",
+      },
     ],
     badge: "every day",
     description:
