@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { tours } from "@/data/tours";
 import TourHero from "@/components/TourHero";
 import TourGallerySlider from "@/components/TourGallerySlider";
+import TourDetails from "@/components/TourDetails";
 
 export async function generateMetadata({
   params,
@@ -32,6 +33,7 @@ export default async function TourPage({
     <main className="flex flex-1 flex-col">
       <TourHero tour={tour} />
       <TourGallerySlider images={tour.images} />
+      <TourDetails tour={tour} />
     </main>
   );
 }
