@@ -12,7 +12,11 @@ const menuLinks = [
 const documentationLinks = ["Privacy Policy", "Public Offer Agreement"];
 
 const socialLinks = [
-  { name: "WhatsApp", icon: "/footer/whatsapp.svg", href: "#" },
+  {
+    name: "WhatsApp",
+    icon: "/footer/whatsapp.svg",
+    href: "https://wa.me/77029855133",
+  },
   { name: "Telegram", icon: "/footer/telegram.svg", href: "#" },
   { name: "Instagram", icon: "/footer/instagram.svg", href: "#" },
 ];
@@ -38,26 +42,45 @@ export default function Footer() {
               Social Media &amp; Contacts
             </p>
             <div className="flex gap-2">
-              {socialLinks.map((social) => (
-                <ScrollLink
-                  key={social.name}
-                  href={social.href}
-                  aria-label={social.name}
-                  className="flex size-9 items-center justify-center rounded-full bg-white transition-colors hover:bg-white/80 lg:size-10"
-                >
-                  <Image
-                    src={social.icon}
-                    alt=""
-                    width={16}
-                    height={16}
-                    unoptimized
-                  />
-                </ScrollLink>
-              ))}
+              {socialLinks.map((social) =>
+                social.href.startsWith("http") ? (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="flex size-9 items-center justify-center rounded-full bg-white transition-colors hover:bg-white/80 lg:size-10"
+                  >
+                    <Image
+                      src={social.icon}
+                      alt=""
+                      width={16}
+                      height={16}
+                      unoptimized
+                    />
+                  </a>
+                ) : (
+                  <ScrollLink
+                    key={social.name}
+                    href={social.href}
+                    aria-label={social.name}
+                    className="flex size-9 items-center justify-center rounded-full bg-white transition-colors hover:bg-white/80 lg:size-10"
+                  >
+                    <Image
+                      src={social.icon}
+                      alt=""
+                      width={16}
+                      height={16}
+                      unoptimized
+                    />
+                  </ScrollLink>
+                ),
+              )}
             </div>
             <div className="flex flex-col gap-2 font-sans text-sm text-white/70 lg:text-base">
-              <a href="tel:+77777473243" className="hover:text-white">
-                +7 (777) 747 3243
+              <a href="tel:+77029855133" className="hover:text-white">
+                +7 (702) 985 5133
               </a>
               <a
                 href="mailto:sabi-go-travel@gmail.com"

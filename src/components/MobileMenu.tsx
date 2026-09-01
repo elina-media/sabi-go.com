@@ -77,10 +77,10 @@ export default function MobileMenu() {
           ))}
         </ul>
 
-        <p className="text-xl text-white/50">+7 (777) 747 3243</p>
+        <p className="text-xl text-white/50">+7 (702) 985 5133</p>
 
         <a
-          href="https://wa.me/77777473243"
+          href="https://wa.me/77029855133"
           className="mt-auto flex h-[50px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white text-[18px] text-ink transition-colors hover:bg-white/90"
         >
           <Image src="/hero/whatsapp.svg" alt="" width={20} height={20} unoptimized />

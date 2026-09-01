@@ -77,7 +77,12 @@ export default function NavbarContent({
         <div className="flex items-center justify-end gap-8">
           <LanguageSwitcher theme={theme} />
 
-          <div className="flex items-center gap-2">
+          <a
+            href="https://wa.me/77029855133"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2"
+          >
             <span className="flex size-[30px] items-center justify-center rounded-full bg-white">
               <Image
                 src="/hero/whatsapp.svg"
@@ -87,8 +92,8 @@ export default function NavbarContent({
                 unoptimized
               />
             </span>
-            <p className={`text-base ${textColor}`}>+7 (777) 747 3243</p>
-          </div>
+            <p className={`text-base ${textColor}`}>+7 (702) 985 5133</p>
+          </a>
         </div>
       </div>
     </>
