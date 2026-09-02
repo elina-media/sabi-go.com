@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import ScrollLink from "./ScrollLink";
 
 const menuLinks = [
@@ -27,14 +28,16 @@ export default function Footer() {
       <div className="rounded-[24px] bg-ink p-6 md:portrait:rounded-[32px] md:portrait:p-10 lg:rounded-[40px] lg:p-16">
         <div className="grid grid-cols-1 gap-8 md:portrait:grid-cols-12 md:portrait:gap-6 lg:grid-cols-12 lg:gap-6">
           <div className="col-span-3">
-            <Image
-              src="/hero/logo.svg"
-              alt="Sabi Go Travel"
-              width={193}
-              height={46}
-              unoptimized
-              className="h-[38px] w-[160px] md:portrait:h-[42px] md:portrait:w-[175px] lg:h-[46px] lg:w-[193px]"
-            />
+            <Link href="/">
+              <Image
+                src="/hero/logo.webp"
+                alt="Sabi Go Travel"
+                width={68}
+                height={72}
+                unoptimized
+                className="h-[64px] w-auto md:portrait:h-[80px] lg:h-[96px]"
+              />
+            </Link>
           </div>
 
           <div className="col-span-3 flex flex-col gap-4">
