@@ -6,15 +6,8 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import MenuToggleIcon from "./MenuToggleIcon";
 import ScrollLink from "./ScrollLink";
 import { useMobileMenu } from "./MobileMenuProvider";
-
-const navLinks = [
-  { label: "Main", href: "#main" },
-  { label: "Tours", href: "#tours" },
-  { label: "Private tour", href: "#private-tour" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Education", href: "#" },
-  { label: "Contacts", href: "#contacts" },
-];
+import { navLinks, copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 export default function NavbarContent({
   theme = "light",
@@ -22,6 +15,7 @@ export default function NavbarContent({
   theme?: "light" | "dark";
 }) {
   const { isOpen, setIsOpen } = useMobileMenu();
+  const t = useT();
   const textColor = theme === "dark" ? "text-ink" : "text-white";
 
   return (
@@ -80,9 +74,9 @@ export default function NavbarContent({
 
         <ul className={`flex items-center justify-center gap-6 text-base ${textColor}`}>
           {navLinks.map((link) => (
-            <li key={link.label} className="whitespace-nowrap">
+            <li key={link.href} className="whitespace-nowrap">
               <ScrollLink href={link.href} className="transition-colors hover:text-accent">
-                {link.label}
+                {t(link.label)}
               </ScrollLink>
             </li>
           ))}
@@ -104,7 +98,7 @@ export default function NavbarContent({
               height={20}
               unoptimized
             />
-            <span className="text-base">Write on WhatsApp</span>
+            <span className="text-base">{t(copy.nav.writeOnWhatsapp)}</span>
           </a>
         </div>
       </div>

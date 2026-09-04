@@ -6,15 +6,8 @@ import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ScrollLink from "./ScrollLink";
 import { useMobileMenu } from "./MobileMenuProvider";
-
-const navLinks = [
-  { label: "Main", href: "#main" },
-  { label: "Tours", href: "#tours" },
-  { label: "Private tour", href: "#private-tour" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Education", href: "#" },
-  { label: "Contacts", href: "#contacts" },
-];
+import { navLinks, copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 // Rendered once at the page level (not inside NavbarContent, which mounts
 // twice — once in Hero, once in the sticky Header) so the drawer/backdrop
@@ -25,6 +18,7 @@ function subscribeNoop() {
 
 export default function MobileMenu() {
   const { isOpen, setIsOpen } = useMobileMenu();
+  const t = useT();
   // Portals require `document.body`, which doesn't exist during SSR — this
   // reads false on the server/first paint and true once hydrated on the
   // client, without the extra render-effect-render cascade of setState-in-effect.
@@ -65,13 +59,13 @@ export default function MobileMenu() {
 
         <ul className="flex flex-col gap-5 text-xl text-white">
           {navLinks.map((link) => (
-            <li key={link.label}>
+            <li key={link.href}>
               <ScrollLink
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="transition-colors hover:text-accent"
               >
-                {link.label}
+                {t(link.label)}
               </ScrollLink>
             </li>
           ))}
@@ -84,7 +78,7 @@ export default function MobileMenu() {
           className="mt-auto flex h-[50px] w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white text-[18px] text-ink transition-colors hover:bg-white/90"
         >
           <Image src="/hero/whatsapp.svg" alt="" width={20} height={20} unoptimized />
-          Write on WhatsApp
+          {t(copy.nav.writeOnWhatsapp)}
         </a>
       </div>
     </>,
