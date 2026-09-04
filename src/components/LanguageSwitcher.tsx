@@ -3,8 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import GlobeIcon from "./GlobeIcon";
 import { useLanguage } from "./LanguageProvider";
+import type { Locale } from "@/lib/i18n";
 
-const allLanguages = ["ENG", "RU", "KZ", "العربية"];
+const LOCALE_LABELS: Record<Locale, string> = {
+  en: "ENG",
+  ru: "RU",
+  kz: "KZ",
+  ar: "العربية",
+};
+
+const allLocales: Locale[] = ["en", "ru", "kz", "ar"];
 
 export default function LanguageSwitcher({
   theme = "light",
@@ -17,7 +25,7 @@ export default function LanguageSwitcher({
   const { current, setCurrent } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const options = allLanguages.filter((lang) => lang !== current);
+  const options = allLocales.filter((locale) => locale !== current);
   const triggerColor = theme === "dark" ? "text-ink" : "text-white";
 
   useEffect(() => {
@@ -47,7 +55,7 @@ export default function LanguageSwitcher({
         className={`flex items-center gap-1.5 text-base ${triggerColor}`}
       >
         <GlobeIcon />
-        <span>{current}</span>
+        <span>{LOCALE_LABELS[current]}</span>
         <svg
           width="10"
           height="6"
@@ -76,17 +84,17 @@ export default function LanguageSwitcher({
           the dropdown instead of a margin outside it. */}
       {isOpen && (
         <ul className="absolute left-0 top-full z-10 flex min-w-[88px] flex-col overflow-hidden rounded-xl bg-white py-1 pt-1 shadow-lg">
-          {options.map((lang) => (
-            <li key={lang}>
+          {options.map((locale) => (
+            <li key={locale}>
               <button
                 type="button"
                 onClick={() => {
-                  setCurrent(lang);
+                  setCurrent(locale);
                   setIsOpen(false);
                 }}
                 className="w-full px-4 py-2 text-left text-base text-ink transition-colors hover:bg-muted"
               >
-                {lang}
+                {LOCALE_LABELS[locale]}
               </button>
             </li>
           ))}
