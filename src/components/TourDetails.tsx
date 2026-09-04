@@ -56,9 +56,18 @@ export default function TourDetails({ tour }: { tour: Tour }) {
               >
                 <div className="overflow-hidden">
                   <ul className="flex flex-col gap-1 pb-4 font-sans text-xs leading-normal text-ink/70 md:portrait:pb-5 md:portrait:text-sm lg:pb-5 lg:text-sm xl:pb-6 xl:text-base">
-                    {items.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
+                    {items.map((item, i) => {
+                      const isHeading =
+                        key === "timing" && /^(Day|Option)\s+\d+$/.test(item);
+                      return (
+                        <li
+                          key={i}
+                          className={isHeading && i !== 0 ? "mt-3" : undefined}
+                        >
+                          {item}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>

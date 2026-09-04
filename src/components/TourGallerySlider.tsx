@@ -43,11 +43,11 @@ export default function TourGallerySlider({
   }, [index]);
 
   function showPrevious() {
-    setIndex((current) => Math.max(0, current - 1));
+    setIndex((current) => (current - 1 + images.length) % images.length);
   }
 
   function showNext() {
-    setIndex((current) => Math.min(images.length - 1, current + 1));
+    setIndex((current) => (current + 1) % images.length);
   }
 
   return (
@@ -66,18 +66,16 @@ export default function TourGallerySlider({
             <button
               type="button"
               onClick={showPrevious}
-              disabled={index === 0}
               aria-label="Previous photo"
-              className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white disabled:pointer-events-none disabled:opacity-40 md:portrait:size-11 lg:size-12 xl:size-14"
+              className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:size-11 lg:size-12 xl:size-14"
             >
               <Chevron direction="left" />
             </button>
             <button
               type="button"
               onClick={showNext}
-              disabled={index === images.length - 1}
               aria-label="Next photo"
-              className="absolute right-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white disabled:pointer-events-none disabled:opacity-40 md:portrait:size-11 lg:size-12 xl:size-14"
+              className="absolute right-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:size-11 lg:size-12 xl:size-14"
             >
               <Chevron direction="right" />
             </button>

@@ -18,7 +18,11 @@ const socialLinks = [
     icon: "/footer/whatsapp.svg",
     href: "https://wa.me/77029855133",
   },
-  { name: "Telegram", icon: "/footer/telegram.svg", href: "#" },
+  {
+    name: "Telegram",
+    icon: "/footer/telegram.svg",
+    href: "https://t.me/sabigotravel",
+  },
   { name: "Instagram", icon: "/footer/instagram.svg", href: "#" },
 ];
 
@@ -86,10 +90,10 @@ export default function Footer() {
                 +7 (702) 985 5133
               </a>
               <a
-                href="mailto:sabi-go-travel@gmail.com"
+                href="mailto:sabigotravel@gmail.com"
                 className="hover:text-white"
               >
-                sabi-go-travel@gmail.com
+                sabigotravel@gmail.com
               </a>
             </div>
           </div>

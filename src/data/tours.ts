@@ -39,27 +39,27 @@ export const tours: Tour[] = [
     images: [
       {
         src: "/tours/kolsai-kaindy-moon-canyon.webp",
-        alt: "Kolsai Lake surrounded by pine forest and mountains",
-      },
-      {
-        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
-        alt: "Tourists boarding boats at the Kolsai Lake dock",
-      },
-      {
-        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
-        alt: "Aerial view of Kaindy Lake's sunken forest",
+        alt: "Kaindy Lake's turquoise water and its sunken pine forest",
       },
       {
         src: "/tours/kolsai-kaindy-moon-canyon-4.webp",
-        alt: "Kolsai Lake surrounded by snow-capped mountain peaks",
+        alt: "Wide view of Moon Canyon's layered rock formations",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
+        alt: "River winding through the canyon near Moon Canyon",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
+        alt: "Kolsai Lake surrounded by pine forest and mountain peaks",
       },
       {
         src: "/tours/kolsai-kaindy-moon-canyon-5.webp",
-        alt: "Turquoise waters of Kaindy Lake with sunken trees",
+        alt: "Wooden boardwalk along Kolsai Lake with boats on the water",
       },
       {
         src: "/tours/kolsai-kaindy-moon-canyon-6.webp",
-        alt: "Wooden walkway along Kolsai Lake with mountain backdrop",
+        alt: "A wooden pier reaching out over Kolsai Lake",
       },
     ],
     badge: "every day",
@@ -102,24 +102,24 @@ export const tours: Tour[] = [
         alt: "Canyon landscape with layered rock formations",
       },
       {
-        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
-        alt: "Tourists boarding boats at the Kolsai Lake dock",
-      },
-      {
-        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
-        alt: "Aerial view of Kaindy Lake's sunken forest",
-      },
-      {
-        src: "/tours/kolsai-kaindy-moon-canyon-4.webp",
-        alt: "Kolsai Lake surrounded by snow-capped mountain peaks",
-      },
-      {
         src: "/tours/kolsai-kaindy-moon-canyon-5.webp",
-        alt: "Turquoise waters of Kaindy Lake with sunken trees",
+        alt: "Wooden boardwalk along Kolsai Lake with boats on the water",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
+        alt: "Kolsai Lake surrounded by pine forest and mountain peaks",
       },
       {
         src: "/tours/kolsai-kaindy-moon-canyon-6.webp",
-        alt: "Wooden walkway along Kolsai Lake with mountain backdrop",
+        alt: "A wooden pier reaching out over Kolsai Lake",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-4.webp",
+        alt: "Wide view of Moon Canyon's layered rock formations",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-3.webp",
+        alt: "River winding through the canyon near Moon Canyon",
       },
     ],
     badge: "Mon, Wed, Fri",
@@ -166,6 +166,26 @@ export const tours: Tour[] = [
         src: "/tours/big-almaty-lake-falcon-show.webp",
         alt: "Big Almaty Lake surrounded by snow-capped mountains",
       },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-2.webp",
+        alt: "Big Almaty Lake's turquoise water framed by snowy peaks in winter",
+      },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-3.webp",
+        alt: "Wildflowers and pine trees along the shore of Big Almaty Lake",
+      },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-4.webp",
+        alt: "Hikers walking along the mountain water pipeline near Big Almaty Lake",
+      },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-5.webp",
+        alt: "The mountain water pipeline leading toward Big Almaty Lake",
+      },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-6.webp",
+        alt: "A forest lake with autumn foliage along the shore",
+      },
     ],
     badge: "every day",
     description:
@@ -200,7 +220,27 @@ export const tours: Tour[] = [
     images: [
       {
         src: "/tours/oi-qaragai-mountain-resort.webp",
-        alt: "Oi-Qaragai mountain resort in a pine forest",
+        alt: "Colorful cottages of Oi-Qaragai Mountain Resort among autumn trees",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-2.webp",
+        alt: "Traditional yurt restaurant at the entrance to Oi-Qaragai Mountain Resort",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-3.webp",
+        alt: "Chairlift ride above the forest at Oi-Qaragai Mountain Resort",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-4.webp",
+        alt: "Green mountain ridges and pine forest surrounding Oi-Qaragai",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-5.webp",
+        alt: "Wooden cabins and a yurt along a mountain stream at the resort",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-6.webp",
+        alt: "A treehouse-style cabin among tall pine trees",
       },
     ],
     badge: "every day",
@@ -242,6 +282,162 @@ export const tours: Tour[] = [
     additionalInfo: [
       "$60 per person — hiking route + falconry show",
       "$80 per person — car ride",
+      "Tours run every day",
+    ],
+  },
+  {
+    id: "city-tour",
+    title: "City Tour",
+    price: "$60",
+    images: [
+      {
+        src: "/tours/city-tour.webp",
+        alt: "Shymbulak gondola cabin over a chalet village in the mountains",
+      },
+      {
+        src: "/tours/city-tour-7.webp",
+        alt: "Panfilov Park alley with the Momyshuly monument and war memorial cannons",
+      },
+      {
+        src: "/tours/city-tour-8.webp",
+        alt: "Ascension Cathedral in Panfilov Park",
+      },
+      {
+        src: "/tours/city-tour-9.webp",
+        alt: "Eternal flame at the Memorial of Glory in Panfilov Park",
+      },
+      {
+        src: "/tours/city-tour-3.webp",
+        alt: "Aerial view of Shymbulak's chalets and mountain road",
+      },
+      {
+        src: "/tours/city-tour-4.webp",
+        alt: "Gondola cabin carrying skiers over snowy peaks",
+      },
+      {
+        src: "/tours/city-tour-5.webp",
+        alt: "Medeu skating rink surrounded by autumn mountains",
+      },
+      {
+        src: "/tours/city-tour-6.webp",
+        alt: "View of the ski slope from above the clouds at Shymbulak",
+      },
+    ],
+    badge: "every day",
+    description:
+      "A flexible one-day city tour around Almaty — choose one of four route options: Shymbulak ski resort and Panfilov Park, the Alma-Arasan and Ayusai gorges, Kok-Tobe and Central Park, or the Green Bazaar and Arbat pedestrian street. A relaxed way to see the best of Almaty and its surroundings, tailored to what you want to explore.",
+    timing: [
+      "Option 1",
+      "11:00–15:30 — Visit Shymbulak Mountain Resort (3 cable car stations) and enjoy the snow and mountain scenery",
+      "16:30–17:30 — Visit Panfilov Park and the Memorial of Glory",
+      "Option 2",
+      "11:00–15:30 — Visit Alma-Arasan Gorge (hot springs) and Ayusai Gorge",
+      "16:00–17:00 — Watch a bird show or visit the Presidential Park",
+      "Option 3",
+      "11:00–13:30 — Visit Kok-Tobe Park (cable car, panoramic views and summer slide)",
+      "14:00–17:00 — Visit Central Park: amusement rides, lake and zoo",
+      "Option 4",
+      "13:30–15:30 — Visit Green Bazaar and a chocolate factory",
+      "16:00–18:00 — Walk along Arbat pedestrian street and explore the city center",
+    ],
+    inclusive: [
+      "Pickup from the meeting point",
+      "Transportation",
+      "English-speaking guide",
+      "Entrance tickets to all national parks",
+      "Lunch box",
+      "Bottled water",
+    ],
+    exclusive: ["Horseback riding", "Taxi at certain locations"],
+    additionalInfo: [
+      "$60 per person — hiking route + falconry show",
+      "$80 per person — car ride",
+      "Tours run every day",
+    ],
+  },
+  {
+    id: "tour-package",
+    title: "Tour Package",
+    price: "$60",
+    images: [
+      {
+        src: "/tours/city-tour-4.webp",
+        alt: "Gondola cabin carrying skiers over snowy peaks",
+      },
+      {
+        src: "/tours/city-tour.webp",
+        alt: "Shymbulak gondola cabin over a chalet village in the mountains",
+      },
+      {
+        src: "/tours/city-tour-3.webp",
+        alt: "Aerial view of Shymbulak's chalets and mountain road",
+      },
+      {
+        src: "/tours/city-tour-7.webp",
+        alt: "Panfilov Park alley with the Momyshuly monument and war memorial cannons",
+      },
+      {
+        src: "/tours/city-tour-8.webp",
+        alt: "Ascension Cathedral in Panfilov Park",
+      },
+      {
+        src: "/tours/city-tour-9.webp",
+        alt: "Eternal flame at the Memorial of Glory in Panfilov Park",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-2.webp",
+        alt: "Kolsai Lake surrounded by pine forest and mountain peaks",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-5.webp",
+        alt: "Wooden boardwalk along Kolsai Lake with boats on the water",
+      },
+      {
+        src: "/tours/kolsai-kaindy-moon-canyon-6.webp",
+        alt: "A wooden pier reaching out over Kolsai Lake",
+      },
+      {
+        src: "/tours/oi-qaragai-mountain-resort-4.webp",
+        alt: "Green mountain ridges and pine forest near Almaty",
+      },
+      {
+        src: "/tours/big-almaty-lake-falcon-show-3.webp",
+        alt: "Wildflowers and pine trees in the Almaty mountains",
+      },
+    ],
+    badge: "every day",
+    description:
+      "A 6-day journey through Almaty's mountains and lakes — Shymbulak ski resort, Kolsai Lake, Alma-Arasan and Ayusai gorges, Butakovka gorge, the Lesnaya Skazka mountain resort and Issyk Lake. Scenic hikes, riverside stops and breathtaking views every day.",
+    timing: [
+      "Day 1",
+      "11:00–15:30 — Visit Shymbulak Mountain Resort (3 cable car stations), enjoy the mountain views and snowy scenery",
+      "16:30–17:30 — Visit Panfilov Park and the Memorial of Glory",
+      "Day 2",
+      "09:00–18:00 — Trip to Kolsai Lake, enjoy the breathtaking natural scenery and relax by the lake",
+      "Day 3",
+      "10:30–15:30 — Visit Alma-Arasan Gorge (natural springs and riverside relaxation) and Ayusai Gorge",
+      "16:00–17:30 — Visit the Presidential Park",
+      "Day 4",
+      "10:30–15:30 — Visit Butakovka Gorge, a walk through the forest and along the river",
+      "16:00–18:00 — Visit Lesnaya Skazka Mountain Resort (cable car, mountain views and entertainment)",
+      "Day 5",
+      "09:30–17:30 — Trip to Issyk Lake, with stops at trout farms and riverside recreation areas along the way",
+      "Day 6",
+      "Transfer to Almaty Airport according to the flight departure time",
+    ],
+    inclusive: [
+      "Pickup from the meeting point",
+      "Transportation",
+      "English-speaking guide",
+      "Entrance tickets to all national parks",
+      "Lunch box",
+      "Bottled water",
+    ],
+    exclusive: ["Horseback riding", "Taxi at certain locations"],
+    additionalInfo: [
+      "$60 per person for a group of 16",
+      "$90 per person for a group of 8",
+      "$110 per person for a group of 3",
       "Tours run every day",
     ],
   },
