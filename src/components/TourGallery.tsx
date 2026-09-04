@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import type { TourImage } from "@/data/tours";
+import type { Localized } from "@/lib/i18n";
+import { useT } from "@/lib/i18n";
+import { copy } from "@/data/copy";
 
 function Chevron({ direction }: { direction: "left" | "right" }) {
   return (
@@ -30,9 +33,10 @@ export default function TourGallery({
   badge,
 }: {
   images: TourImage[];
-  badge?: string;
+  badge?: Localized<string>;
 }) {
   const [index, setIndex] = useState(0);
+  const t = useT();
   const hasMultiple = images.length > 1;
 
   function showPrevious() {
@@ -55,7 +59,7 @@ export default function TourGallery({
 
       {badge && (
         <span className="absolute right-2 top-2 flex h-[22px] items-center rounded-full bg-white/16 px-2.5 text-xs text-white backdrop-blur-[3.5px] md:portrait:right-3 md:portrait:top-3 md:portrait:h-[26px] md:portrait:px-3 md:portrait:text-sm lg:right-3 lg:top-3 lg:h-[28px] lg:px-3.5 lg:text-sm xl:right-4 xl:top-4 xl:h-[30px] xl:px-4 xl:text-base">
-          {badge}
+          {t(badge)}
         </span>
       )}
 
@@ -64,7 +68,7 @@ export default function TourGallery({
           <button
             type="button"
             onClick={showPrevious}
-            aria-label="Previous photo"
+            aria-label={t(copy.a11y.previousPhoto)}
             className="absolute left-2 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:left-2.5 md:portrait:size-8 lg:left-3 lg:size-8 xl:left-3 xl:size-9"
           >
             <Chevron direction="left" />
@@ -72,7 +76,7 @@ export default function TourGallery({
           <button
             type="button"
             onClick={showNext}
-            aria-label="Next photo"
+            aria-label={t(copy.a11y.nextPhoto)}
             className="absolute right-2 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:right-2.5 md:portrait:size-8 lg:right-3 lg:size-8 xl:right-3 xl:size-9"
           >
             <Chevron direction="right" />

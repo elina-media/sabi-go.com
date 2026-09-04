@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { TourImage } from "@/data/tours";
+import { copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 function Chevron({ direction }: { direction: "left" | "right" }) {
   return (
@@ -33,6 +35,7 @@ export default function TourGallerySlider({
   const [index, setIndex] = useState(0);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const hasMultiple = images.length > 1;
+  const t = useT();
 
   useEffect(() => {
     thumbRefs.current[index]?.scrollIntoView({
@@ -66,7 +69,7 @@ export default function TourGallerySlider({
             <button
               type="button"
               onClick={showPrevious}
-              aria-label="Previous photo"
+              aria-label={t(copy.a11y.previousPhoto)}
               className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:size-11 lg:size-12 xl:size-14"
             >
               <Chevron direction="left" />
@@ -74,7 +77,7 @@ export default function TourGallerySlider({
             <button
               type="button"
               onClick={showNext}
-              aria-label="Next photo"
+              aria-label={t(copy.a11y.nextPhoto)}
               className="absolute right-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink transition-colors hover:bg-white md:portrait:size-11 lg:size-12 xl:size-14"
             >
               <Chevron direction="right" />
@@ -97,7 +100,7 @@ export default function TourGallerySlider({
               }}
               type="button"
               onClick={() => setIndex(i)}
-              aria-label={`Photo ${i + 1}`}
+              aria-label={`${t(copy.a11y.photoLabel)} ${i + 1}`}
               className={`relative h-20 shrink-0 overflow-hidden rounded-lg transition-[width] duration-300 md:portrait:h-24 lg:h-24 xl:h-28 ${
                 i === index
                   ? "w-[120px] md:portrait:w-[150px] lg:w-[150px] xl:w-[175px]"
