@@ -16,8 +16,8 @@ export async function generateMetadata({
   if (!tour) return {};
 
   return {
-    title: `${tour.title} — Sabi Go Travel`,
-    description: tour.description || undefined,
+    title: `${tour.title.en} — Sabi Go Travel`,
+    description: tour.description.en || undefined,
   };
 }
 

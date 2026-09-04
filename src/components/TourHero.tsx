@@ -5,10 +5,13 @@ import type { Tour } from "@/data/tours";
 import NavbarContent from "./NavbarContent";
 import { useMobileMenu } from "./MobileMenuProvider";
 import { useBookingModal } from "./BookingModalProvider";
+import { copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 export default function TourHero({ tour }: { tour: Tour }) {
   const { isOpen } = useMobileMenu();
   const { open } = useBookingModal();
+  const t = useT();
 
   return (
     <section
@@ -36,14 +39,12 @@ export default function TourHero({ tour }: { tour: Tour }) {
 
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-4 text-center max-lg:landscape:gap-3 md:portrait:gap-6 lg:gap-6">
           <h1 className="max-w-3xl font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-white md:portrait:text-[44px] md:portrait:leading-[1.15] md:max-w-5xl md:text-[60px] md:leading-[1.1]">
-            {tour.title}
+            {t(tour.title)}
           </h1>
 
-          {tour.description && (
-            <p className="max-w-2xl text-[clamp(13px,3.6vw,18px)] text-white md:portrait:text-2xl lg:text-2xl">
-              {tour.description}
-            </p>
-          )}
+          <p className="max-w-2xl text-[clamp(13px,3.6vw,18px)] text-white md:portrait:text-2xl lg:text-2xl">
+            {t(tour.description)}
+          </p>
 
           <button
             type="button"
@@ -57,7 +58,9 @@ export default function TourHero({ tour }: { tour: Tour }) {
               height={24}
               unoptimized
             />
-            <span className="text-[22px] tracking-[-0.5px]">Book a tour</span>
+            <span className="text-[22px] tracking-[-0.5px]">
+              {t(copy.tours.bookButton)}
+            </span>
           </button>
         </div>
       </div>
