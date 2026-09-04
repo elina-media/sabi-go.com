@@ -183,7 +183,7 @@ export const copy = {
       ),
     } satisfies Localized<ReactNode>,
     subtitle: {
-      en: "Leave your details and we'll help you create the perfect trip from Almaty.",
+      en: "Leave your details and we’ll help you create the perfect trip from Almaty.",
       ru: "Оставьте свои данные, и мы поможем создать идеальное путешествие из Алматы.",
     } satisfies Localized<string>,
   },
@@ -203,11 +203,11 @@ export const copy = {
       ru: "Спасибо!",
     } satisfies Localized<string>,
     thankYouBody: {
-      en: "We've received your request and will contact you shortly.",
+      en: "We’ve received your request and will contact you shortly.",
       ru: "Мы получили вашу заявку и скоро свяжемся с вами.",
     } satisfies Localized<string>,
     errorMessage: {
-      en: "Couldn't send your request — please try again.",
+      en: "Couldn’t send your request — please try again.",
       ru: "Не удалось отправить заявку — попробуйте ещё раз.",
     } satisfies Localized<string>,
   },
