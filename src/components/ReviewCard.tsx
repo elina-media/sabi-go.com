@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import type { Review } from "@/data/reviews";
 import Stars from "./Stars";
+import { useT } from "@/lib/i18n";
 
 export default function ReviewCard({ review }: { review: Review }) {
+  const t = useT();
   return (
     <article className="flex h-[180px] w-[300px] shrink-0 flex-col gap-3 overflow-hidden rounded-[20px] bg-muted p-3 md:portrait:h-[210px] md:portrait:w-[350px] md:portrait:gap-4 md:portrait:rounded-[24px] md:portrait:p-3.5 lg:h-[225px] lg:w-[380px] lg:gap-5 lg:rounded-[27px] lg:p-4 xl:h-[240px] xl:w-[411px] xl:gap-6 xl:rounded-[30px]">
       <div className="flex shrink-0 items-start justify-between">
@@ -20,7 +24,7 @@ export default function ReviewCard({ review }: { review: Review }) {
           <div className="flex flex-col gap-1">
             <p className="font-sans text-sm text-ink md:portrait:text-base lg:text-lg xl:text-[20px]">{review.name}</p>
             <p className="font-sans text-xs text-ink/50 md:portrait:text-sm lg:text-sm xl:text-base">
-              {review.reviewDate}
+              {t(review.reviewDate)}
             </p>
           </div>
         </div>
@@ -30,7 +34,7 @@ export default function ReviewCard({ review }: { review: Review }) {
       </div>
 
       <p className="line-clamp-4 font-sans text-xs leading-normal text-ink md:portrait:text-sm lg:text-sm xl:line-clamp-5 xl:text-base">
-        {review.text}
+        {t(review.text)}
       </p>
     </article>
   );

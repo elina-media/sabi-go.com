@@ -1,16 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import ScrollLink from "./ScrollLink";
-
-const menuLinks = [
-  { label: "Main", href: "#main" },
-  { label: "Tours", href: "#tours" },
-  { label: "Private tour", href: "#private-tour" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contacts", href: "#contacts" },
-];
-
-const documentationLinks = ["Privacy Policy", "Public Offer Agreement"];
+import { navLinks, documentationLinks, copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 const socialLinks = [
   {
@@ -27,6 +21,7 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const t = useT();
   return (
     <footer id="contacts" className="w-full scroll-mt-[140px] p-4">
       <div className="rounded-[24px] bg-ink p-6 md:portrait:rounded-[32px] md:portrait:p-10 lg:rounded-[40px] lg:p-16">
@@ -46,7 +41,7 @@ export default function Footer() {
 
           <div className="col-span-3 flex flex-col gap-4">
             <p className="font-sans text-lg text-white lg:text-xl">
-              Social Media &amp; Contacts
+              {t(copy.footer.socialContacts)}
             </p>
             <div className="flex gap-2">
               {socialLinks.map((social) =>
@@ -99,27 +94,31 @@ export default function Footer() {
           </div>
 
           <div className="col-span-3 flex flex-col gap-2">
-            <p className="font-sans text-lg text-white lg:text-xl">Menu</p>
-            {menuLinks.map((link) => (
+            <p className="font-sans text-lg text-white lg:text-xl">
+              {t(copy.footer.menu)}
+            </p>
+            {navLinks.map((link) => (
               <ScrollLink
-                key={link.label}
+                key={link.href}
                 href={link.href}
                 className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
-                {link.label}
+                {t(link.label)}
               </ScrollLink>
             ))}
           </div>
 
           <div className="col-span-3 flex flex-col gap-2">
-            <p className="font-sans text-lg text-white lg:text-xl">Documentation</p>
+            <p className="font-sans text-lg text-white lg:text-xl">
+              {t(copy.footer.documentation)}
+            </p>
             {documentationLinks.map((link) => (
               <ScrollLink
-                key={link}
+                key={link.en}
                 href="#"
                 className="font-sans text-sm text-white/70 hover:text-white lg:text-base"
               >
-                {link}
+                {t(link)}
               </ScrollLink>
             ))}
           </div>
