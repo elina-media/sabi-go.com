@@ -4,12 +4,15 @@ import { useState, type FormEvent } from "react";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useLeadSubmit } from "@/lib/useLeadSubmit";
 import PhoneInput from "./PhoneInput";
+import { copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 const inputClassName =
   "h-[50px] w-full rounded-[70px] bg-white px-6 font-sans text-[20px] text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
 
 export default function PrivateTourForm() {
   const { status, submit } = useLeadSubmit();
+  const t = useT();
   const [whatsapp, setWhatsapp] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -32,10 +35,10 @@ export default function PrivateTourForm() {
   if (status === "success") {
     return (
       <div className="flex w-full max-w-[518px] flex-col gap-2 rounded-[30px] bg-white px-6 py-5 text-ink">
-        <p className="font-sans text-2xl font-medium">Thank you!</p>
-        <p className="font-sans text-lg">
-          We&rsquo;ve received your request and will contact you shortly.
+        <p className="font-sans text-2xl font-medium">
+          {t(copy.form.thankYouTitle)}
         </p>
+        <p className="font-sans text-lg">{t(copy.form.thankYouBody)}</p>
       </div>
     );
   }
@@ -58,7 +61,7 @@ export default function PrivateTourForm() {
           type="text"
           name="fullName"
           required
-          placeholder="Full name"
+          placeholder={t(copy.form.fullNamePlaceholder)}
           autoComplete="name"
           className={inputClassName}
         />
@@ -67,7 +70,7 @@ export default function PrivateTourForm() {
           type="email"
           name="email"
           required
-          placeholder="E-mail"
+          placeholder={t(copy.form.emailPlaceholder)}
           autoComplete="email"
           className={inputClassName}
         />
@@ -75,7 +78,7 @@ export default function PrivateTourForm() {
 
       {status === "error" && (
         <p className="mt-2 font-sans text-sm text-red-300">
-          Couldn&rsquo;t send your request — please try again.
+          {t(copy.form.errorMessage)}
         </p>
       )}
 
@@ -84,7 +87,9 @@ export default function PrivateTourForm() {
         disabled={status === "submitting" || !isValidPhoneNumber(whatsapp)}
         className="mt-2 flex h-[50px] w-full items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
       >
-        {status === "submitting" ? "Sending…" : "Submit a request"}
+        {status === "submitting"
+          ? t(copy.form.sending)
+          : t(copy.form.submitButton)}
       </button>
     </form>
   );

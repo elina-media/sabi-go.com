@@ -12,6 +12,8 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import { useBookingModal } from "./BookingModalProvider";
 import { useLeadSubmit } from "@/lib/useLeadSubmit";
 import PhoneInput from "./PhoneInput";
+import { copy } from "@/data/copy";
+import { useT } from "@/lib/i18n";
 
 const inputClassName =
   "h-[50px] w-full rounded-[70px] bg-muted px-6 font-sans text-[20px] text-ink placeholder:text-ink/50 focus:outline-none focus:ring-2 focus:ring-accent";
@@ -35,6 +37,7 @@ function priceForSeats(price: string, seats: number): string {
 export default function BookingModal() {
   const { tour, close } = useBookingModal();
   const { status, submit, reset } = useLeadSubmit();
+  const t = useT();
   const [seats, setSeats] = useState(MIN_SEATS);
   const [whatsapp, setWhatsapp] = useState("");
   const isOpen = tour !== null;
@@ -74,7 +77,7 @@ export default function BookingModal() {
 
     const form = event.currentTarget;
     await submit({
-      tour: tour.title,
+      tour: tour.title.en,
       seats,
       totalPrice: priceForSeats(tour.price, seats),
       fullName: (form.elements.namedItem("fullName") as HTMLInputElement)
@@ -106,14 +109,14 @@ export default function BookingModal() {
           <button
             type="button"
             onClick={handleClose}
-            aria-label="Close"
+            aria-label={t(copy.a11y.close)}
             className="absolute right-4 top-4 text-3xl leading-none text-ink/70 transition-colors hover:text-ink"
           >
             &times;
           </button>
 
           <h3 className="pr-8 font-sans text-2xl font-medium text-ink">
-            Booking a tour
+            {t(copy.bookingModal.title)}
           </h3>
 
           <div className="flex items-center gap-3 rounded-[20px] bg-muted p-3">
@@ -127,14 +130,14 @@ export default function BookingModal() {
               />
             </div>
 
-            <p className="flex-1 font-sans text-sm text-ink">{tour.title}</p>
+            <p className="flex-1 font-sans text-sm text-ink">{t(tour.title)}</p>
 
             <div className="flex shrink-0 items-center gap-2">
               <button
                 type="button"
                 onClick={() => setSeats((s) => Math.max(MIN_SEATS, s - 1))}
                 disabled={seats <= MIN_SEATS}
-                aria-label="Decrease seats"
+                aria-label={t(copy.a11y.decreaseSeats)}
                 className="flex size-6 items-center justify-center rounded-full bg-white text-ink transition-colors hover:bg-white/70 disabled:opacity-40"
               >
                 −
@@ -144,7 +147,7 @@ export default function BookingModal() {
                 type="button"
                 onClick={() => setSeats((s) => Math.min(MAX_SEATS, s + 1))}
                 disabled={seats >= MAX_SEATS}
-                aria-label="Increase seats"
+                aria-label={t(copy.a11y.increaseSeats)}
                 className="flex size-6 items-center justify-center rounded-full bg-white text-ink transition-colors hover:bg-white/70 disabled:opacity-40"
               >
                 +
@@ -157,17 +160,15 @@ export default function BookingModal() {
           </div>
 
           <p className="font-sans text-sm text-ink/60">
-            After booking, our manager will contact you via WhatsApp to
-            confirm the details of your tour.
+            {t(copy.bookingModal.confirmationNote)}
           </p>
 
           {status === "success" ? (
             <div className="flex flex-col gap-2 text-ink">
-              <p className="font-sans text-2xl font-medium">Thank you!</p>
-              <p className="font-sans text-lg">
-                We&rsquo;ve received your request and will contact you
-                shortly.
+              <p className="font-sans text-2xl font-medium">
+                {t(copy.form.thankYouTitle)}
               </p>
+              <p className="font-sans text-lg">{t(copy.form.thankYouBody)}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-1">
@@ -183,7 +184,7 @@ export default function BookingModal() {
                 type="text"
                 name="fullName"
                 required
-                placeholder="Full name"
+                placeholder={t(copy.form.fullNamePlaceholder)}
                 autoComplete="name"
                 className={inputClassName}
               />
@@ -192,14 +193,14 @@ export default function BookingModal() {
                 type="email"
                 name="email"
                 required
-                placeholder="E-mail"
+                placeholder={t(copy.form.emailPlaceholder)}
                 autoComplete="email"
                 className={inputClassName}
               />
 
               {status === "error" && (
                 <p className="mt-2 font-sans text-sm text-red-500">
-                  Couldn&rsquo;t send your request — please try again.
+                  {t(copy.form.errorMessage)}
                 </p>
               )}
 
@@ -208,7 +209,9 @@ export default function BookingModal() {
                 disabled={status === "submitting" || !isValidPhoneNumber(whatsapp)}
                 className="mt-2 flex h-[50px] w-full items-center justify-center rounded-full bg-accent text-[22px] tracking-[-0.5px] text-white transition-colors hover:bg-accent-hover disabled:opacity-60"
               >
-                {status === "submitting" ? "Sending…" : "Submit a request"}
+                {status === "submitting"
+                  ? t(copy.form.sending)
+                  : t(copy.form.submitButton)}
               </button>
             </form>
           )}
