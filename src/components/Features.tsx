@@ -1,54 +1,48 @@
-import Image from "next/image";
+"use client";
 
-const features = [
+import type { ReactNode } from "react";
+import Image from "next/image";
+import { copy } from "@/data/copy";
+import { useT, type Localized } from "@/lib/i18n";
+
+const features: {
+  id: string;
+  image: string;
+  imageAlt: string;
+  label: Localized<ReactNode>;
+}[] = [
   {
     id: "destinations",
     image: "/features/destinations.webp",
     imageAlt: "Map of Kazakhstan with tour destinations marked",
-    label: (
-      <>
-        <span className="font-accent italic">10+</span> Destinations across
-        Kazakhstan
-      </>
-    ),
+    label: copy.features.destinations,
   },
   {
     id: "seasons",
     image: "/features/seasons.webp",
     imageAlt: "Tour van",
-    label: (
-      <>
-        <span className="font-accent italic">4 Seasons</span> tours all year
-        round
-      </>
-    ),
+    label: copy.features.seasons,
   },
   {
     id: "groups",
     image: "/features/groups.webp",
     imageAlt: "Camping tent",
-    label: "Small Groups More comfort, less crowds",
+    label: copy.features.groups,
   },
   {
     id: "guides",
     image: "/features/guides.webp",
     imageAlt: "Passport",
-    label: (
-      <>
-        <span className="font-accent italic">10 guides</span> with C1 English
-        level
-      </>
-    ),
+    label: copy.features.guides,
   },
 ];
 
 export default function Features() {
+  const t = useT();
   return (
     <section className="mx-auto max-w-[1280px] px-4 py-12 md:py-20">
       <h2 className="mx-auto max-w-[624px] text-center font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-ink md:portrait:text-[44px] md:portrait:leading-[1.15] md:text-[60px] md:leading-[1.1]">
-        The little <span className="font-accent italic text-accent">things</span> that{" "}
-        <span className="font-accent italic text-accent">make</span> every trip{" "}
-        <span className="font-accent italic text-accent">better</span>
+        {t(copy.features.heading)}
       </h2>
 
       <div className="mt-8 grid grid-cols-2 gap-4 md:mt-16 md:portrait:grid-cols-4 lg:grid-cols-4 lg:gap-6">
@@ -65,7 +59,7 @@ export default function Features() {
               className="pointer-events-none object-cover"
             />
             <p className="relative font-sans text-[clamp(15px,4vw,18px)] font-medium leading-[1.15] text-ink md:portrait:text-[22px] lg:text-[26px] xl:text-[32px] xl:leading-[1.1]">
-              {feature.label}
+              {t(feature.label)}
             </p>
           </div>
         ))}
