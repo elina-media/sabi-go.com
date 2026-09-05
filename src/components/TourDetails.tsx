@@ -63,7 +63,9 @@ export default function TourDetails({ tour }: { tour: Tour }) {
                       const text = t(item);
                       const isHeading =
                         key === "timing" &&
-                        /^(Day|Option|День|Вариант)\s+\d+$/.test(text);
+                        /^(Day|Option|День|Вариант|Күн|Нұсқа|اليوم|الخيار)\s+\d+$/.test(
+                          text,
+                        );
                       return (
                         <li
                           key={i}
