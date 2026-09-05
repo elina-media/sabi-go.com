@@ -98,10 +98,9 @@ export const copy = {
       ),
       kz: (
         <>
-          Қазақстанның{" "}
-          <span className="font-accent italic">жабайы қырын</span>
+          Қазақстанның
           <br />
-          ашыңыз
+          <span className="font-accent italic">жабайы қырын</span> ашыңыз
         </>
       ),
       ar: (
