@@ -30,15 +30,6 @@ export const navLinks: { label: Localized<string>; href: string }[] = [
   },
   {
     label: {
-      en: "Education",
-      ru: "Образование",
-      kz: "Білім беру",
-      ar: "التعليم",
-    },
-    href: "#",
-  },
-  {
-    label: {
       en: "Contacts",
       ru: "Контакты",
       kz: "Байланыстар",
