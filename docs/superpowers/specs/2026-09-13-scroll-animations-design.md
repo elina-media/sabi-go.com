@@ -78,36 +78,51 @@ language:
 ```tsx
 destinations: {
   value: 10,
+  styledSuffix: {
+    en: "+", ru: "+", kz: "+", ar: "+",
+  } satisfies Localized<string>,
   restText: {
-    en: "+ Destinations across Kazakhstan",
-    ru: "+ направлений по Казахстану",
-    kz: "+ бағыт Қазақстан бойынша",
-    ar: "+ وجهة في جميع أنحاء كازاخستان",
-  } satisfies Localized<ReactNode>,
+    en: " Destinations across Kazakhstan",
+    ru: " направлений по Казахстану",
+    kz: " бағыт Қазақстан бойынша",
+    ar: " وجهة في جميع أنحاء كازاخستان",
+  } satisfies Localized<string>,
 },
 ```
 
-The split point is always right after the digits: everything from the
-`+` (or space, for entries with no `+`) onward becomes `restText`,
-verbatim per locale — no rewording. Same treatment for `seasons` (value:
-4, `restText` starts with a space: `" Seasons tours all year round"` /
-`" сезона туров круглый год"` / etc.) and `guides` (value: 10, `restText`
-starts with a space: `" guides with C1 English level"` / etc.). The
-fourth feature card, `groups`, has no number and keeps its current
-`label: Localized<ReactNode>` shape untouched.
+The original markup only wraps part of the phrase in the accent span
+(`font-accent italic`) — for `destinations` that's just `"10+"`, but for
+`seasons` it's `"4 Seasons"` and for `guides` it's `"10 guides"` (the word
+right after the number is styled too, not just the digits). To preserve
+the exact original visual result, each entry splits into three parts
+instead of two:
+
+- `value: number` — the digits, animated by `CountUp`.
+- `styledSuffix: Localized<string>` — whatever sits inside the accent
+  span immediately after the number (`"+"` for destinations, `" Seasons"`
+  / `" сезона"` / etc. for seasons, `" guides"` / `" гидов"` / etc. for
+  guides).
+- `restText: Localized<string>` — the unstyled remainder, rendered
+  outside the span (`" Destinations across Kazakhstan"`, `" tours all
+  year round"`, `" with C1 English level"`, and their translations).
+
+Same three-field treatment for `seasons` (value: 4) and `guides` (value:
+10). The fourth feature card, `groups`, has no number and keeps its
+current `label: Localized<ReactNode>` shape untouched.
 
 `Features.tsx` renders the animated entries as:
 
 ```tsx
 <span className="font-accent italic">
   <CountUp value={feature.value} />
-  {t(feature.restText)}
+  {t(feature.styledSuffix)}
 </span>
+{t(feature.restText)}
 ```
 
-The `features` array becomes a union of the two shapes (`{ value,
-restText }` vs `{ label }`); `Features.tsx` branches on whether `value` is
-present.
+The local `features` array in `Features.tsx` becomes a discriminated
+union of two shapes (`{ kind: "count", value, styledSuffix, restText }`
+vs `{ kind: "text", label }`); the component branches on `kind`.
 
 ## Where `Reveal` is applied
 
