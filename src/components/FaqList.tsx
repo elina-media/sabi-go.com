@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FaqEntry } from "@/data/faq";
 import FaqItem from "./FaqItem";
+import Reveal from "./Reveal";
 
 export default function FaqList({ entries }: { entries: FaqEntry[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -13,13 +14,14 @@ export default function FaqList({ entries }: { entries: FaqEntry[] }) {
 
   return (
     <div className="mt-8 grid grid-cols-1 items-start gap-2 md:mt-16 md:grid-cols-2 md:gap-2">
-      {entries.map((entry) => (
-        <FaqItem
-          key={entry.id}
-          entry={entry}
-          isOpen={openId === entry.id}
-          onToggle={() => toggle(entry.id)}
-        />
+      {entries.map((entry, index) => (
+        <Reveal key={entry.id} delay={index * 0.06}>
+          <FaqItem
+            entry={entry}
+            isOpen={openId === entry.id}
+            onToggle={() => toggle(entry.id)}
+          />
+        </Reveal>
       ))}
     </div>
   );

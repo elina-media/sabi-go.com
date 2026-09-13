@@ -1,6 +1,7 @@
 "use client";
 
 import PrivateTourForm from "./PrivateTourForm";
+import Reveal from "./Reveal";
 import { copy } from "@/data/copy";
 import { useT } from "@/lib/i18n";
 
@@ -24,18 +25,18 @@ export default function PrivateTour() {
         />
         <div className="absolute inset-0 bg-black/40" />
 
-        <div className="relative flex max-w-[518px] flex-col gap-2 text-center">
+        <Reveal className="relative flex max-w-[518px] flex-col gap-2 text-center">
           <h2 className="font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-white md:portrait:text-[44px] md:portrait:leading-[1.15] md:text-[60px] md:leading-[1.1]">
             {t(copy.privateTour.heading)}
           </h2>
           <p className="font-sans text-[clamp(17px,4.8vw,24px)] leading-tight text-white">
             {t(copy.privateTour.subtitle)}
           </p>
-        </div>
+        </Reveal>
 
-        <div className="relative flex w-full justify-center">
+        <Reveal delay={0.15} className="relative flex w-full justify-center">
           <PrivateTourForm />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

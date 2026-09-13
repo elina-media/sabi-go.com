@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ScrollLink from "./ScrollLink";
+import Reveal from "./Reveal";
 import { navLinks, documentationLinks, copy } from "@/data/copy";
 import { useT } from "@/lib/i18n";
 
@@ -17,14 +18,18 @@ const socialLinks = [
     icon: "/footer/telegram.svg",
     href: "https://t.me/sabigotravel",
   },
-  { name: "Instagram", icon: "/footer/instagram.svg", href: "#" },
+  {
+    name: "Instagram",
+    icon: "/footer/instagram.svg",
+    href: "https://www.instagram.com/sabigo_kz",
+  },
 ];
 
 export default function Footer() {
   const t = useT();
   return (
     <footer id="contacts" className="w-full scroll-mt-[140px] p-4">
-      <div className="rounded-[24px] bg-ink p-6 md:portrait:rounded-[32px] md:portrait:p-10 lg:rounded-[40px] lg:p-16">
+      <Reveal className="rounded-[24px] bg-ink p-6 md:portrait:rounded-[32px] md:portrait:p-10 lg:rounded-[40px] lg:p-16">
         <div className="grid grid-cols-1 gap-8 md:portrait:grid-cols-12 md:portrait:gap-6 lg:grid-cols-12 lg:gap-6">
           <div className="col-span-3">
             <Link href="/">
@@ -127,7 +132,7 @@ export default function Footer() {
         <p className="mt-10 font-sans text-sm text-white/50 md:portrait:mt-16 lg:mt-20">
           TOO &ldquo;Sabi Go Travel&rdquo; 2025
         </p>
-      </div>
+      </Reveal>
     </footer>
   );
 }

@@ -29,6 +29,9 @@
 - `src/components/MobileMenuProvider.tsx` — React Context для состояния мобильного меню (`isOpen`/`setIsOpen`), тот же паттерн что `LanguageProvider.tsx`; общее состояние нужно, т.к. `NavbarContent.tsx` монтируется дважды (Hero + Header). Подключён в `layout.tsx`. `"use client"`
 - `src/components/MobileMenu.tsx` — сам мобильный drawer (боковая шторка с лого/языком/меню/контактами/кнопкой), рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. `"use client"`
 - `src/components/BookingModalProvider.tsx` — React Context для состояния booking-модала (`tour: Tour | null`/`open(tour)`/`close()`), тот же паттерн что `MobileMenuProvider.tsx`. Подключён в `layout.tsx`. `"use client"`
+- `src/components/MotionConfigProvider.tsx` — обёртка `MotionConfig` (пакет `motion`) с `reducedMotion="user"`, подключена в `layout.tsx`; глобально уважает системную настройку `prefers-reduced-motion` для всех `motion`-компонентов сайта. `"use client"`
+- `src/components/Reveal.tsx` — переиспользуемый `motion.div`-wrapper для fade+slide-анимации при появлении в viewport (`whileInView`, `viewport={{ once: true }}`), опциональный `delay` для стаггера карточек; используется в Features, Tours, PrivateTour, FAQ, Reviews (только заголовок), Footer. `"use client"`
+- `src/components/CountUp.tsx` — анимация счётчика числа при попадании в viewport (`useInView` + `animate` из `motion`), используется для 3 статистик в Features. `"use client"`
 - `src/components/BookingModal.tsx` — светлый popup для выбранного тура: карточка тура (фото/название/степпер мест 1–10/растущая цена через `priceForSeats`), форма + состояние отправки. Рендерится ОДИН раз в `page.tsx` через `createPortal` в `document.body`. Использует `useBookingModal()` и `useLeadSubmit()`. `"use client"`
 - `src/components/PhoneInput.tsx` — общий инпут номера WhatsApp с маской и выбором страны (обёртка над `react-phone-number-input`, дефолт Казахстан, любая страна доступна), переиспользуется в `PrivateTourForm` и `BookingModal`. Единственный не-Tailwind CSS в проекте (`react-phone-number-input/style.css`, см. `design-system.md`). `"use client"`
 - `src/components/LanguageProvider.tsx` — React Context для языка (`current: Locale`/`setCurrent`), подключён в `layout.tsx`, читается через `useLanguage()`. Persist в `localStorage` (`sabi-go-locale`); сервер всегда рендерит `en`, клиент подхватывает сохранённое значение после mount (SSR-safe hydration). `"use client"`
@@ -57,7 +60,7 @@
 ## Конвенции
 - Компоненты — `PascalCase.tsx`, один компонент = один блок страницы (`src/components/{Block}.tsx`)
 - Стили — только Tailwind-классы (utility-first); кастомные токены — через `@theme inline` в `globals.css`; inline `style`, CSS-модули и styled-components не используются
-- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `PhoneInput`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`. Остальное — серверные компоненты по умолчанию
+- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `PhoneInput`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`, `MotionConfigProvider`, `Reveal`, `CountUp`. Остальное — серверные компоненты по умолчанию
 - Данные для повторяющихся блоков — TS-массивы в `src/data/*.ts`; каждый файл экспортирует `type` + массив, компоненты просто мапят данные — контент редактируется без изменения компонентов
 - Типы — не в отдельной папке `/types`, а прямо рядом с данными в `src/data/*.ts`
 - Общая логика (хуки, клиенты внешних API) — `src/lib/*.ts` рядом с компонентами (например `telegram.ts`, `leadSheet.ts`, `useLeadSubmit.ts`). Не в отдельных папках `/hooks`, `/utils`
@@ -73,6 +76,7 @@
 - ESLint ^9 (`eslint-config-next`)
 - `googleapis` — Google Sheets API integration
 - `react-phone-number-input` — маска/валидация номера WhatsApp с выбором страны (`PhoneInput.tsx`)
+- `motion` — анимации: scroll-reveal (`Reveal.tsx`) и count-up чисел (`CountUp.tsx`), глобальный `prefers-reduced-motion` через `MotionConfigProvider.tsx`
 - Package manager: npm (pnpm недоступен на этой машине из-за прав corepack)
 - Деплой: Vercel
 - Интеграции: заявки → Telegram-бот + Google Sheets (реализовано через `/api/lead`)
@@ -125,6 +129,7 @@
 - [x] Маска номера WhatsApp — `PhoneInput.tsx` (флаг страны, дефолт Казахстан, любая страна доступна), отправка заблокирована пока номер не полный. В обеих формах. См. `docs/superpowers/plans/2026-08-30-phone-input-mask.md`
 - [x] i18n RU + рабочий `LanguageSwitcher` — весь сайт (главная страница + все 6 `/tours/[slug]`) рендерится на EN или RU через `useT()`/`Localized<T>` (`src/lib/i18n.ts`), выбор персистится в `localStorage`. `tour` в `/api/lead` всегда уходит на английском (`tour.title.en`) независимо от языка UI. SEO `<title>`/`<meta description>` тоже всегда английские. См. `docs/superpowers/plans/2026-09-04-i18n-ru.md`
 - [x] i18n KZ/AR контент — `kz`/`ar` ключи добавлены во все существующие `Localized<...>` объекты (`copy.tsx`, `tours.ts`, `reviews.ts`, `faq.ts`), без изменений компонентов (кроме расширения regex в `TourDetails.tsx` для распознавания "Күн"/"Нұсқа"/"اليوم"/"الخيار" как заголовков дня/варианта). Машинный перевод — нужна проверка носителем языка перед публикацией. RTL для арабского не реализован (отдельные строки рендерятся справа налево через юникод bidi, но общий layout остаётся LTR)
+- [x] Scroll-reveal + count-up анимации — новая зависимость `motion`; `Reveal.tsx` (fade+slide через `whileInView`/`viewport={{ once: true }}`, опциональный `delay` для стаггера) и `CountUp.tsx` (анимация числа при появлении в viewport) подключены в Features (+ `CountUp` на 3 статистиках), Tours, PrivateTour, FAQ, Reviews (только заголовок), Footer. Глобальный `prefers-reduced-motion` — `MotionConfigProvider` (`MotionConfig reducedMotion="user"`) в `layout.tsx`. Для анимируемых статистик Features `copy.tsx` перестроен с цельной строки на `{value, styledSuffix, restText}`, чтобы число анимировалось отдельно от текста. См. `docs/superpowers/plans/2026-09-13-scroll-animations.md`
 - [ ] (добавим следующие блоки по мере появления)
 
 ## ВАЖНО
