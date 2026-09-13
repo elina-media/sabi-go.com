@@ -177,57 +177,35 @@ export const copy = {
       ),
     } satisfies Localized<ReactNode>,
     destinations: {
-      en: (
-        <>
-          <span className="font-accent italic">10+</span> Destinations across
-          Kazakhstan
-        </>
-      ),
-      ru: (
-        <>
-          <span className="font-accent italic">10+</span> направлений по
-          Казахстану
-        </>
-      ),
-      kz: (
-        <>
-          <span className="font-accent italic">10+</span> бағыт Қазақстан
-          бойынша
-        </>
-      ),
-      ar: (
-        <>
-          <span className="font-accent italic">10+</span> وجهة في جميع أنحاء
-          كازاخستان
-        </>
-      ),
-    } satisfies Localized<ReactNode>,
+      value: 10,
+      styledSuffix: {
+        en: "+",
+        ru: "+",
+        kz: "+",
+        ar: "+",
+      } satisfies Localized<string>,
+      restText: {
+        en: " Destinations across Kazakhstan",
+        ru: " направлений по Казахстану",
+        kz: " бағыт Қазақстан бойынша",
+        ar: " وجهة في جميع أنحاء كازاخستان",
+      } satisfies Localized<string>,
+    },
     seasons: {
-      en: (
-        <>
-          <span className="font-accent italic">4 Seasons</span> tours all
-          year round
-        </>
-      ),
-      ru: (
-        <>
-          <span className="font-accent italic">4 сезона</span> туров
-          круглый год
-        </>
-      ),
-      kz: (
-        <>
-          <span className="font-accent italic">4 маусым</span> турлары жыл
-          бойы
-        </>
-      ),
-      ar: (
-        <>
-          <span className="font-accent italic">4 فصول</span> من الجولات على
-          مدار السنة
-        </>
-      ),
-    } satisfies Localized<ReactNode>,
+      value: 4,
+      styledSuffix: {
+        en: " Seasons",
+        ru: " сезона",
+        kz: " маусым",
+        ar: " فصول",
+      } satisfies Localized<string>,
+      restText: {
+        en: " tours all year round",
+        ru: " туров круглый год",
+        kz: " турлары жыл бойы",
+        ar: " من الجولات على مدار السنة",
+      } satisfies Localized<string>,
+    },
     groups: {
       en: "Small Groups More comfort, less crowds",
       ru: "Маленькие группы Больше комфорта, меньше людей",
@@ -235,31 +213,20 @@ export const copy = {
       ar: "مجموعات صغيرة راحة أكبر وازدحام أقل",
     } satisfies Localized<string>,
     guides: {
-      en: (
-        <>
-          <span className="font-accent italic">10 guides</span> with C1
-          English level
-        </>
-      ),
-      ru: (
-        <>
-          <span className="font-accent italic">10 гидов</span> с английским
-          уровня C1
-        </>
-      ),
-      kz: (
-        <>
-          <span className="font-accent italic">10 гид</span> C1
-          деңгейіндегі ағылшын тілімен
-        </>
-      ),
-      ar: (
-        <>
-          <span className="font-accent italic">10 مرشدين</span> يتحدثون
-          الإنجليزية بمستوى C1
-        </>
-      ),
-    } satisfies Localized<ReactNode>,
+      value: 10,
+      styledSuffix: {
+        en: " guides",
+        ru: " гидов",
+        kz: " гид",
+        ar: " مرشدين",
+      } satisfies Localized<string>,
+      restText: {
+        en: " with C1 English level",
+        ru: " с английским уровня C1",
+        kz: " C1 деңгейіндегі ағылшын тілімен",
+        ar: " يتحدثون الإنجليزية بمستوى C1",
+      } satisfies Localized<string>,
+    },
   },
   tours: {
     heading: {
