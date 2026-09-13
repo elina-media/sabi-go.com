@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { neueMontreal, ppEditorialItalic } from "./fonts";
+import { MotionConfigProvider } from "@/components/MotionConfigProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { MobileMenuProvider } from "@/components/MobileMenuProvider";
 import { BookingModalProvider } from "@/components/BookingModalProvider";
@@ -23,18 +24,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${neueMontreal.variable} ${ppEditorialItalic.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <LanguageProvider>
-          <MobileMenuProvider>
-            <BookingModalProvider>
-              <ScrollToTop />
-              <Header />
-              <MobileMenu />
-              <BookingModal />
-              {children}
-              <Footer />
-            </BookingModalProvider>
-          </MobileMenuProvider>
-        </LanguageProvider>
+        <MotionConfigProvider>
+          <LanguageProvider>
+            <MobileMenuProvider>
+              <BookingModalProvider>
+                <ScrollToTop />
+                <Header />
+                <MobileMenu />
+                <BookingModal />
+                {children}
+                <Footer />
+              </BookingModalProvider>
+            </MobileMenuProvider>
+          </LanguageProvider>
+        </MotionConfigProvider>
       </body>
     </html>
   );
