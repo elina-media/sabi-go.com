@@ -1,4 +1,3 @@
-// src/components/PrivateTour.tsx
 "use client";
 
 import PrivateTourForm from "./PrivateTourForm";

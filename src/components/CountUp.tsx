@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, useInView, useMotionValue } from "motion/react";
+import { animate, useInView, useMotionValue, useReducedMotion } from "motion/react";
 
 export default function CountUp({
   value,
@@ -14,6 +14,11 @@ export default function CountUp({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const motionValue = useMotionValue(0);
   const [display, setDisplay] = useState(0);
+  // motion's built-in `MotionConfig reducedMotion="user"` only patches
+  // `motion` components (via `VisualElement`) — the imperative `animate()`
+  // call below never reads that context, so under prefers-reduced-motion
+  // the count would still climb from 0 unless we check this explicitly.
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const unsubscribe = motionValue.on("change", (latest) => {
@@ -24,9 +29,13 @@ export default function CountUp({
 
   useEffect(() => {
     if (!isInView) return;
+    if (shouldReduceMotion) {
+      motionValue.set(value);
+      return;
+    }
     const controls = animate(motionValue, value, { duration, ease: "easeOut" });
     return controls.stop;
-  }, [isInView, value, duration, motionValue]);
+  }, [isInView, value, duration, motionValue, shouldReduceMotion]);
 
   return <span ref={ref}>{display}</span>;
 }
