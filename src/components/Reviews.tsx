@@ -2,6 +2,7 @@
 
 import { reviews, type Review } from "@/data/reviews";
 import ReviewCard from "./ReviewCard";
+import Reveal from "./Reveal";
 import { copy } from "@/data/copy";
 import { useT } from "@/lib/i18n";
 
@@ -33,9 +34,11 @@ export default function Reviews() {
   const t = useT();
   return (
     <section id="reviews" className="w-full scroll-mt-[140px] py-12 md:py-20">
-      <h2 className="mx-auto max-w-[701px] px-4 text-center font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-ink md:portrait:text-[44px] md:portrait:leading-[1.15] md:text-[60px] md:leading-[1.1]">
-        {t(copy.reviews.heading)}
-      </h2>
+      <Reveal>
+        <h2 className="mx-auto max-w-[701px] px-4 text-center font-sans text-[clamp(24px,6.5vw,32px)] font-medium leading-[1.15] text-ink md:portrait:text-[44px] md:portrait:leading-[1.15] md:text-[60px] md:leading-[1.1]">
+          {t(copy.reviews.heading)}
+        </h2>
+      </Reveal>
 
       <div className="mt-8 flex flex-col gap-3 md:mt-16 md:gap-6">
         <MarqueeRow direction="left" reviews={reviews} />
