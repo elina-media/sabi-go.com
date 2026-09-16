@@ -39,6 +39,7 @@
 - `src/components/Features.tsx` — блок "The little things..." (4 карточки)
 - `src/components/Tours.tsx`, `TourCard.tsx`, `TourGallery.tsx` — блок туров, данные из `src/data/tours.ts`. `TourCard.tsx` — `"use client"` (кнопка "Book a tour" открывает `BookingModal` через `useBookingModal().open(tour)`, передаёт весь объект тура — нужны фото/цена для попапа)
 - `src/components/PrivateTour.tsx`, `PrivateTourForm.tsx` — форма заявки на приватный тур (`PrivateTourForm.tsx` — `"use client"`)
+- `src/components/TourDetails.tsx` — аккордеон на странице тура (`/tours/[slug]`) с категориями timing/inclusive/exclusive/additionalInfo; категория с пустым массивом не рендерится (ни заголовка, ни пустого списка). `"use client"`
 - `src/components/Reviews.tsx`, `ReviewCard.tsx`, `Stars.tsx` — бесконечная карусель отзывов, данные из `src/data/reviews.ts`
 - `src/components/Faq.tsx`, `FaqItem.tsx` — аккордеон FAQ, данные из `src/data/faq.ts`, `Faq.tsx` — `"use client"`
 - `src/components/Footer.tsx` — футер (лого, соцсети, меню, документация, копирайт)
@@ -60,7 +61,7 @@
 ## Конвенции
 - Компоненты — `PascalCase.tsx`, один компонент = один блок страницы (`src/components/{Block}.tsx`)
 - Стили — только Tailwind-классы (utility-first); кастомные токены — через `@theme inline` в `globals.css`; inline `style`, CSS-модули и styled-components не используются
-- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `PhoneInput`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`, `MotionConfigProvider`, `Reveal`, `CountUp`. Остальное — серверные компоненты по умолчанию
+- `"use client"` — только там, где реально нужен интерактив (state/эффекты/обработчики): `Header`, `NavbarContent`, `MobileMenuProvider`, `MobileMenu`, `BookingModalProvider`, `BookingModal`, `PhoneInput`, `LanguageProvider`, `LanguageSwitcher`, `TourCard`, `PrivateTourForm`, `Faq`, `TourGallery`, `TourDetails`, `MotionConfigProvider`, `Reveal`, `CountUp`. Остальное — серверные компоненты по умолчанию
 - Данные для повторяющихся блоков — TS-массивы в `src/data/*.ts`; каждый файл экспортирует `type` + массив, компоненты просто мапят данные — контент редактируется без изменения компонентов
 - Типы — не в отдельной папке `/types`, а прямо рядом с данными в `src/data/*.ts`
 - Общая логика (хуки, клиенты внешних API) — `src/lib/*.ts` рядом с компонентами (например `telegram.ts`, `leadSheet.ts`, `useLeadSubmit.ts`). Не в отдельных папках `/hooks`, `/utils`

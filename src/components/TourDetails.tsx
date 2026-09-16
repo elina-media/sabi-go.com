@@ -24,6 +24,7 @@ export default function TourDetails({ tour }: { tour: Tour }) {
       <div className="flex flex-col gap-2">
         {categories.map(({ key, label }) => {
           const items = tour[key];
+          if (items.length === 0) return null;
           const isOpen = openKey === key;
 
           return (
