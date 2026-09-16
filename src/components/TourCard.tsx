@@ -20,7 +20,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
       </h3>
 
       <span className="mt-2 inline-flex h-[36px] w-fit items-center justify-center rounded-full bg-muted px-3 font-sans text-sm text-ink md:mt-4 md:portrait:h-[42px] md:portrait:px-4 md:portrait:text-base lg:h-[46px] lg:px-4 lg:text-lg xl:h-[50px] xl:px-5 xl:text-2xl">
-        {tour.price}
+        {t(tour.price)}
       </span>
 
       <div className="mt-2 flex flex-col gap-1.5 md:mt-4 md:gap-2">

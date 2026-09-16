@@ -79,7 +79,7 @@ export default function BookingModal() {
     await submit({
       tour: tour.title.en,
       seats,
-      totalPrice: priceForSeats(tour.price, seats),
+      totalPrice: priceForSeats(tour.price.en, seats),
       fullName: (form.elements.namedItem("fullName") as HTMLInputElement)
         .value,
       whatsapp,
@@ -155,7 +155,7 @@ export default function BookingModal() {
             </div>
 
             <span className="shrink-0 font-sans text-lg text-ink">
-              {priceForSeats(tour.price, seats)}
+              {priceForSeats(tour.price.en, seats)}
             </span>
           </div>
 
